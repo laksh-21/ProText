@@ -42,12 +42,14 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     // room
     val roomVersion = "2.4.2"
-
     implementation("androidx.room:room-runtime:$roomVersion")
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
-
     // To use Kotlin annotation processing tool (kapt)
     kapt("androidx.room:room-compiler:$roomVersion")
+
+    // paging
+    val pagingVersion = "3.1.1"
+    implementation("androidx.paging:paging-runtime:$pagingVersion")
 
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$roomVersion")

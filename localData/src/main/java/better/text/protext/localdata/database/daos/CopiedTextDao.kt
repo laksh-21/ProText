@@ -1,13 +1,13 @@
 package better.text.protext.localdata.database.daos
 
+import androidx.paging.PagingSource
 import androidx.room.*
 import better.text.protext.localdata.database.entities.CopiedText
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 abstract class CopiedTextDao {
-    @Query("SELECT * FROM copied_texts")
-    abstract suspend fun getAll(): Flow<List<CopiedText>>
+    @Query("SELECT * FROM copied_texts ORDER BY last_updated DESC")
+    abstract suspend fun getAll(): PagingSource<Int, CopiedText>
 
     @Insert
     abstract suspend fun addCopiedText(copiedText: CopiedText): Int

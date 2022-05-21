@@ -11,7 +11,7 @@ import better.text.protext.localdata.database.utils.UpdateTime
             parentColumns = ["id"],
             childColumns = ["bookmark_folder_id"],
             onDelete = ForeignKey.CASCADE,
-            onUpdate = ForeignKey.NO_ACTION
+            onUpdate = ForeignKey.CASCADE
         )
     ]
 )

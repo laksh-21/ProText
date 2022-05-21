@@ -13,5 +13,5 @@ data class CopiedText(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     @ColumnInfo(name = "text") val text: String,
     @TypeConverters(UpdateTime.TimeConverter::class)
-    @ColumnInfo(name = "added_time") val addedTime: UpdateTime
+    @ColumnInfo(name = "last_updated") val lastUpdated: UpdateTime
 )

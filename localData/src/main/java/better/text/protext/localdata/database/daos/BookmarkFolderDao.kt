@@ -1,13 +1,13 @@
 package better.text.protext.localdata.database.daos
 
+import androidx.paging.PagingSource
 import androidx.room.*
 import better.text.protext.localdata.database.entities.BookmarkFolder
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 abstract class BookmarkFolderDao {
-    @Query("SELECT * FROM bookmark_folder")
-    abstract suspend fun getAll(): Flow<List<BookmarkFolder>>
+    @Query("SELECT * FROM bookmark_folder ORDER BY last_updated DESC")
+    abstract suspend fun getAll(): PagingSource<Int, BookmarkFolder>
 
     @Insert
     abstract suspend fun addNewFolder(bookmarkFolder: BookmarkFolder): Int
