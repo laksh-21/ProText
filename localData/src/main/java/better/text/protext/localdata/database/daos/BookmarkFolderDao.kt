@@ -7,7 +7,7 @@ import better.text.protext.localdata.database.entities.BookmarkFolder
 @Dao
 abstract class BookmarkFolderDao {
     @Query("SELECT * FROM bookmark_folder ORDER BY last_updated DESC")
-    abstract suspend fun getAll(): PagingSource<Int, BookmarkFolder>
+    abstract fun getAll(): PagingSource<Int, BookmarkFolder>
 
     @Insert
     abstract suspend fun addNewFolder(bookmarkFolder: BookmarkFolder): Int

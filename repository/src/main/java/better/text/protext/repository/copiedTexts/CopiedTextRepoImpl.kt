@@ -8,7 +8,7 @@ import javax.inject.Inject
 class CopiedTextRepoImpl @Inject constructor(
     private val copiedTextDao: CopiedTextDao
 ) : CopiedTextRepo {
-    override suspend fun getCopiedTexts(): PagingSource<Int, CopiedText> {
+    override fun getCopiedTexts(): PagingSource<Int, CopiedText> {
         return copiedTextDao.getAll()
     }
 
