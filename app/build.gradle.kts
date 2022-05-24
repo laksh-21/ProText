@@ -42,6 +42,8 @@ android {
 dependencies {
     // hilt
     implementation("com.google.dagger:hilt-android:2.41")
+    implementation(project(mapOf("path" to ":base")))
+//    implementation(project(mapOf("path" to ":base")))
     kapt("com.google.dagger:hilt-android-compiler:2.41")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")

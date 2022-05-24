@@ -1,12 +1,24 @@
 package better.text.protext
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import androidx.appcompat.app.AppCompatActivity
+import better.text.protext.base.baseScreens.BaseActivity
+import better.text.protext.base.databinding.AccessibilityListScreenBinding
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-        setContentView(R.layout.activity_main)
+class MainActivity : BaseActivity<AccessibilityListScreenBinding>() {
+    override fun getViewBinding(): AccessibilityListScreenBinding {
+        return AccessibilityListScreenBinding.inflate(layoutInflater)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?, binding: AccessibilityListScreenBinding) {
+        binding.apply {
+            includedMenuList.apply {
+                add.setOnClickListener {
+                    this.menuItemsContainer.transitionToEnd()
+                }
+                delete.setOnClickListener {
+                    this.menuItemsContainer.transitionToStart()
+                }
+            }
+        }
     }
 }

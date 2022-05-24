@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MenuIconButtons" parent="Widget.Material3.Button.IconButton">
+        <item name="android:tint">?attr/colorOnBackground</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+    <style name="ListTitleText" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
+    <style name="ListRecyclerView">
+        <item name="android:overScrollMode">never</item>
+    </style>
+</resources>

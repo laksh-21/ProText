@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/bookmarkFolderFragment">
+
+    <fragment
+        android:id="@+id/bookmarkFolderFragment"
+        android:name="better.text.protext.ui.bookmarks.fragments.BookmarkFolderFragment"
+        android:label="fragment_bookmark_folder"
+        tools:layout="@layout/fragment_bookmark_folder" >
+        <action
+            android:id="@+id/action_bookmarkFolderFragment_to_bookmarksFragment"
+            app:destination="@id/bookmarksFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookmarksFragment"
+        android:name="better.text.protext.ui.bookmarks.fragments.BookmarksFragment"
+        android:label="fragment_bookmarks"
+        tools:layout="@layout/fragment_bookmarks" >
+        <argument
+            android:name="folderId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
+</navigation>
