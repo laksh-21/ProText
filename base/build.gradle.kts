@@ -31,6 +31,13 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.41")
     kapt("com.google.dagger:hilt-android-compiler:2.41")
 
+    // rv selection
+    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
+
+    // paging
+    val pagingVersion = "3.1.1"
+    implementation("androidx.paging:paging-runtime:$pagingVersion")
+
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 }
 
