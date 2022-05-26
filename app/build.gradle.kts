@@ -43,8 +43,17 @@ dependencies {
     // hilt
     implementation("com.google.dagger:hilt-android:2.41")
     implementation(project(mapOf("path" to ":base")))
+    implementation(project(mapOf("path" to ":ui-bookmarks")))
+    implementation(project(mapOf("path" to ":interactors")))
+    implementation(project(mapOf("path" to ":repository")))
+    implementation(project(mapOf("path" to ":localData")))
 //    implementation(project(mapOf("path" to ":base")))
     kapt("com.google.dagger:hilt-android-compiler:2.41")
+
+    // Navigation
+    val navVersion = "2.4.2"
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
     implementation("androidx.core:core-ktx:1.7.0")

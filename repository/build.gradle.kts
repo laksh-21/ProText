@@ -29,6 +29,7 @@ dependencies {
 
     // hilt
     implementation("com.google.dagger:hilt-android:2.41")
+    kapt("com.google.dagger:hilt-android-compiler:2.41")
 
     // paging
     val pagingVersion = "3.1.1"

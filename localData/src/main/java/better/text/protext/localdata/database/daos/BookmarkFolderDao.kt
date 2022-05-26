@@ -10,7 +10,7 @@ abstract class BookmarkFolderDao {
     abstract fun getAll(): PagingSource<Int, BookmarkFolder>
 
     @Insert
-    abstract suspend fun addNewFolder(bookmarkFolder: BookmarkFolder): Int
+    abstract suspend fun addNewFolder(bookmarkFolder: BookmarkFolder)
 
     @Delete
     abstract suspend fun deleteFolder(bookmarkFolder: BookmarkFolder): Int

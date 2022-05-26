@@ -11,7 +11,7 @@ class ItemListLookup<KT : Any>(
     override fun getItemDetails(e: MotionEvent): ItemDetails<KT>? {
         val view = recyclerView.findChildViewUnder(e.x, e.y)
         return view?.let {
-            (recyclerView.getChildViewHolder(view) as SelectableViewHolder<*, KT, *>).getItemDetails()
+            (recyclerView.getChildViewHolder(view) as SelectableViewHolder<*, KT>).getItemDetails()
         }
     }
 }

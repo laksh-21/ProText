@@ -29,12 +29,24 @@ dependencies {
     // hilt
     implementation("com.google.dagger:hilt-android:2.41")
     implementation(project(mapOf("path" to ":base")))
+    implementation(project(mapOf("path" to ":interactors")))
+    implementation(project(mapOf("path" to ":localData")))
     kapt("com.google.dagger:hilt-android-compiler:2.41")
 
     // navigation
     val navVersion = "2.4.2"
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+
+    // paging
+    val pagingVersion = "3.1.1"
+    implementation("androidx.paging:paging-runtime:$pagingVersion")
+
+    val lifecycleVersion = "2.4.1"
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+
+    // rv selection
+    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
 
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.4.1")

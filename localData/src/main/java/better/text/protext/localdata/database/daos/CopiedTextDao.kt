@@ -10,7 +10,7 @@ abstract class CopiedTextDao {
     abstract fun getAll(): PagingSource<Int, CopiedText>
 
     @Insert
-    abstract suspend fun addCopiedText(copiedText: CopiedText): Int
+    abstract suspend fun addCopiedText(copiedText: CopiedText)
 
     @Delete
     abstract suspend fun deleteCopiedText(copiedText: CopiedText): Int

@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
     kotlin("kapt")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -33,6 +34,11 @@ dependencies {
 
     // rv selection
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
+
+    // navigation
+    val navVersion = "2.4.2"
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 
     // paging
     val pagingVersion = "3.1.1"

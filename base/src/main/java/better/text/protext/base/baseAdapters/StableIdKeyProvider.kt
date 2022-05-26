@@ -29,7 +29,7 @@ class StableIdKeyProvider<KT : Any>(
     fun onAttached(view: View) {
         val holder = mRecyclerView.findContainingViewHolder(view) ?: return
         val position = holder.bindingAdapterPosition
-        val itemId = (holder as SelectableViewHolder<*, KT, *>).itemId
+        val itemId = (holder as SelectableViewHolder<*, KT>).itemId
         if (position != RecyclerView.NO_POSITION && itemId != null) {
             mPositionToKey[position] = itemId
             mKeyToPosition[itemId] = position
@@ -39,7 +39,7 @@ class StableIdKeyProvider<KT : Any>(
     fun onDetached(view: View) {
         val holder = mRecyclerView.findContainingViewHolder(view) ?: return
         val position = holder.bindingAdapterPosition
-        val myItemId = (holder as SelectableViewHolder<*, KT, *>).itemId
+        val myItemId = (holder as SelectableViewHolder<*, KT>).itemId
         if (position != RecyclerView.NO_POSITION && myItemId != null) {
             mPositionToKey.remove(position)
             mKeyToPosition.remove(myItemId)

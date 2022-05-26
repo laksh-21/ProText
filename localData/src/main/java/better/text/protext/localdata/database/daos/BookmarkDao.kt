@@ -13,7 +13,7 @@ abstract class BookmarkDao {
     abstract fun getAllFromFolder(folderId: Long): PagingSource<Int, Bookmark>
 
     @Insert
-    abstract suspend fun addBookmark(bookmark: Bookmark): Int
+    abstract suspend fun addBookmark(bookmark: Bookmark)
 
     @Delete
     abstract suspend fun deleteBookmark(bookmark: Bookmark): Int
