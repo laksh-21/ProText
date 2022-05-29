@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/single"
+        motion:constraintSetStart="@id/none"
+        motion:duration="500">
+       <KeyFrameSet>
+       </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/none">
+        <Constraint
+            android:id="@+id/delete"
+            android:elevation="0dp"
+            motion:layout_constraintEnd_toEndOf="@+id/close"
+            android:layout_width="@dimen/iconButtonSize"
+            android:layout_height="@dimen/iconButtonSize"
+            motion:layout_constraintBottom_toBottomOf="@+id/close"
+            android:alpha="0"
+            motion:layout_constraintTop_toTopOf="@+id/close"
+            motion:layout_constraintStart_toStartOf="@+id/close">
+            <CustomAttribute
+                motion:attributeName="enabled"
+                motion:customBoolean="false" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/close"
+            android:elevation="0dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="@dimen/iconButtonSize"
+            android:layout_height="@dimen/iconButtonSize"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:alpha="0"
+            motion:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                motion:attributeName="enabled"
+                motion:customBoolean="false" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/add"
+            android:elevation="5dp"
+            motion:layout_constraintEnd_toEndOf="@+id/close"
+            android:layout_width="@dimen/iconButtonSize"
+            android:layout_height="@dimen/iconButtonSize"
+            motion:layout_constraintBottom_toBottomOf="@+id/close"
+            android:alpha="1"
+            motion:layout_constraintTop_toTopOf="@+id/close"
+            motion:layout_constraintStart_toStartOf="@+id/close"
+            motion:layout_editor_absoluteY="231dp"
+            motion:layout_editor_absoluteX="231dp">
+            <CustomAttribute
+                motion:attributeName="enabled"
+                motion:customBoolean="true" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/edit"
+            android:elevation="0dp"
+            motion:layout_constraintEnd_toEndOf="@+id/close"
+            android:layout_width="@dimen/iconButtonSize"
+            android:layout_height="@dimen/iconButtonSize"
+            motion:layout_constraintBottom_toBottomOf="@+id/close"
+            android:alpha="0"
+            motion:layout_constraintTop_toTopOf="@+id/close"
+            motion:layout_constraintStart_toStartOf="@+id/close"
+            motion:layout_editor_absoluteY="231dp"
+            motion:layout_editor_absoluteX="134dp">
+            <CustomAttribute
+                motion:attributeName="enabled"
+                motion:customBoolean="false" />
+        </Constraint>
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/single">
+        <Constraint
+            android:id="@+id/delete"
+            android:elevation="5dp"
+            android:layout_width="@dimen/iconButtonSize"
+            android:layout_height="@dimen/iconButtonSize"
+            motion:layout_constraintBottom_toBottomOf="@+id/close"
+            android:alpha="1"
+            motion:layout_constraintTop_toTopOf="@+id/close"
+            motion:layout_constraintEnd_toStartOf="@id/close"
+            android:layout_marginEnd="8dp" >
+            <CustomAttribute
+                motion:attributeName="enabled"
+                motion:customBoolean="true" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/add"
+            android:elevation="0dp"
+            motion:layout_constraintEnd_toEndOf="@+id/close"
+            android:layout_width="@dimen/iconButtonSize"
+            android:layout_height="@dimen/iconButtonSize"
+            motion:layout_constraintBottom_toBottomOf="@+id/close"
+            android:alpha="0"
+            motion:layout_constraintTop_toTopOf="@+id/close"
+            motion:layout_constraintStart_toStartOf="@+id/close"
+            motion:layout_editor_absoluteY="231dp"
+            motion:layout_editor_absoluteX="231dp">
+            <CustomAttribute
+                motion:attributeName="enabled"
+                motion:customBoolean="false" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/close"
+            android:elevation="5dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="@dimen/iconButtonSize"
+            android:layout_height="@dimen/iconButtonSize"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:alpha="1"
+            motion:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                motion:attributeName="enabled"
+                motion:customBoolean="true" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/edit"
+            android:elevation="5dp"
+            android:layout_width="@dimen/iconButtonSize"
+            android:layout_height="@dimen/iconButtonSize"
+            motion:layout_constraintBottom_toBottomOf="@+id/close"
+            android:alpha="1"
+            motion:layout_constraintTop_toTopOf="@+id/close"
+            motion:layout_editor_absoluteY="231dp"
+            motion:layout_constraintEnd_toStartOf="@id/delete"
+            android:layout_marginEnd="8dp">
+            <CustomAttribute
+                motion:attributeName="enabled"
+                motion:customBoolean="true" />
+        </Constraint>
+    </ConstraintSet>
+    <ConstraintSet
+        android:id="@+id/multi"
+        motion:deriveConstraintsFrom="@+id/single" >
+        <Constraint
+            android:id="@+id/edit"
+            android:elevation="0dp"
+            android:layout_width="@dimen/iconButtonSize"
+            android:layout_height="@dimen/iconButtonSize"
+            motion:layout_constraintBottom_toBottomOf="@+id/close"
+            android:layout_marginEnd="0dp"
+            android:alpha="0"
+            motion:layout_constraintTop_toTopOf="@+id/close"
+            motion:layout_editor_absoluteY="231dp"
+            motion:layout_constraintEnd_toEndOf="@id/delete"
+            motion:layout_constraintStart_toStartOf="@id/delete" >
+            <CustomAttribute
+                motion:attributeName="enabled"
+                motion:customBoolean="false" />
+        </Constraint>
+    </ConstraintSet>
+    <Transition
+        motion:constraintSetStart="@+id/single"
+        motion:constraintSetEnd="@+id/multi" />
+</MotionScene>

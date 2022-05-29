@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="120dp"
-    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/menu_items_container"
+    android:layout_width="160dp"
+    android:layout_height="wrap_content"
     android:background="@android:color/transparent"
-    app:layoutDescription="@xml/selected_menu_items_scene">
+    app:layoutDescription="@xml/selected_menu_items_scene2">
+
 
     <ImageButton
         android:id="@+id/delete"
@@ -13,11 +15,42 @@
         android:layout_width="@dimen/iconButtonSize"
         android:layout_height="@dimen/iconButtonSize"
         android:alpha="0"
-        android:contentDescription="delete"
+        android:contentDescription="@string/delete"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/close"
+        app:layout_constraintEnd_toEndOf="@+id/close"
+        app:layout_constraintStart_toStartOf="@+id/close"
+        app:layout_constraintTop_toTopOf="@+id/close"
+        app:srcCompat="@drawable/ic_delete" />
+
+    <ImageButton
+        android:id="@+id/close"
+        style="@style/MenuIconButtons"
+        android:layout_width="@dimen/iconButtonSize"
+        android:layout_height="@dimen/iconButtonSize"
+        android:alpha="0"
+        android:contentDescription="@string/close"
+        android:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_delete" />
+        app:srcCompat="@drawable/ic_close" />
+
+    <ImageButton
+        android:id="@+id/add"
+        style="@style/MenuIconButtons"
+        android:layout_width="@dimen/iconButtonSize"
+        android:layout_height="@dimen/iconButtonSize"
+        android:alpha="1"
+        android:contentDescription="@string/add"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/close"
+        app:layout_constraintEnd_toEndOf="@+id/close"
+        app:layout_constraintStart_toStartOf="@+id/close"
+        app:layout_constraintTop_toTopOf="@+id/close"
+        app:srcCompat="@drawable/ic_add"
+        tools:layout_editor_absoluteX="231dp"
+        tools:layout_editor_absoluteY="231dp" />
 
     <ImageButton
         android:id="@+id/edit"
@@ -25,23 +58,13 @@
         android:layout_width="@dimen/iconButtonSize"
         android:layout_height="@dimen/iconButtonSize"
         android:alpha="0"
-        android:contentDescription="edit"
-        app:layout_constraintBottom_toBottomOf="@+id/delete"
-        app:layout_constraintEnd_toEndOf="@+id/delete"
-        app:layout_constraintStart_toStartOf="@+id/delete"
-        app:layout_constraintTop_toTopOf="@+id/delete"
-        app:srcCompat="@drawable/ic_edit" />
-
-    <ImageButton
-        android:id="@+id/add"
-        style="@style/MenuIconButtons"
-        android:layout_width="@dimen/iconButtonSize"
-        android:layout_height="@dimen/iconButtonSize"
-        android:contentDescription="add"
-        app:layout_constraintBottom_toBottomOf="@+id/delete"
-        app:layout_constraintEnd_toEndOf="@+id/delete"
-        app:layout_constraintStart_toStartOf="@+id/delete"
-        app:layout_constraintTop_toTopOf="@+id/delete"
-        app:srcCompat="@drawable/ic_add" />
-
+        android:contentDescription="@string/edit"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/close"
+        app:layout_constraintEnd_toEndOf="@+id/close"
+        app:layout_constraintStart_toStartOf="@+id/close"
+        app:layout_constraintTop_toTopOf="@+id/close"
+        app:srcCompat="@drawable/ic_edit"
+        tools:layout_editor_absoluteX="134dp"
+        tools:layout_editor_absoluteY="231dp" />
 </androidx.constraintlayout.motion.widget.MotionLayout>

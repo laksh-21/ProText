@@ -2,6 +2,7 @@ package better.text.protext.ui.bookmarks.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
@@ -22,7 +23,6 @@ import better.text.protext.ui.bookmarks.viewmodels.AddBookmarkFolderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.util.*
 
 @AndroidEntryPoint
 class AddBookmarkFolderFragment :
@@ -55,6 +55,9 @@ class AddBookmarkFolderFragment :
 
     private fun initViews() {
         binding.btnAddBookmark.isEnabled = false
+        binding.colorSelector.apply {
+            (getChildAt(0) as? RecyclerView)?.overScrollMode = View.OVER_SCROLL_NEVER
+        }
     }
 
     private fun initVariables() {

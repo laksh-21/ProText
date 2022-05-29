@@ -14,10 +14,14 @@ class ColorSelectorViewHolder(
     fun bind(item: BookmarkFolder) {
         binding.apply {
             tvFolderName.text = item.folderName
-            folderCard.setCardBackgroundColor(Color.parseColor(item.folderColor))
-            folderCard.updateLayoutParams {
-                height = ViewGroup.LayoutParams.MATCH_PARENT
-                width = ViewGroup.LayoutParams.MATCH_PARENT
+            folderCard.apply {
+                setCardBackgroundColor(Color.parseColor(item.folderColor))
+                updateLayoutParams {
+                    height = ViewGroup.LayoutParams.MATCH_PARENT
+                    width = ViewGroup.LayoutParams.MATCH_PARENT
+                }
+                isFocusable = false
+                isClickable = false
             }
         }
     }

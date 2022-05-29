@@ -2,4 +2,6 @@
 <resources>
     <item name="sideMargins" type="dimen">16dp</item>
     <item name="iconButtonSize" type="dimen">48dp</item>
+    <item name="pageTitleExpanded" type="dimen">32sp</item>
+    <item name="pageTitleCollapsed" type="dimen">20sp</item>
 </resources>

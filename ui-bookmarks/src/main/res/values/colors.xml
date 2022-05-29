@@ -8,4 +8,5 @@
     <color name="purpy_purp">#DBA5FF</color>
     <color name="reed_red">#F2847F</color>
     <color name="grid_item_text">#1B1A17</color>
+    <color name="grid_item_icon">#801B1A17</color>
 </resources>

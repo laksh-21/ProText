@@ -17,6 +17,7 @@ class BookmarkFolderViewHolder(
         viewBinding.apply {
             folderCard.setCardBackgroundColor(Color.parseColor(item.folderColor))
             tvFolderName.text = item.folderName
+            folderCard.isChecked = selectionTracker.isSelected(itemId)
         }
     }
 

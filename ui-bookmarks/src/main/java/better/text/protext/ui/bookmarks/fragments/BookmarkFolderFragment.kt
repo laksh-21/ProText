@@ -8,6 +8,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.selection.SelectionPredicates
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
 import androidx.recyclerview.widget.GridLayoutManager
@@ -29,6 +30,22 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
     private val viewModel: BookmarkFolderViewModel by viewModels()
     private lateinit var adapter: BookmarkFolderAdapter
     private lateinit var navController: NavController
+    private lateinit var tracker: SelectionTracker<Long>
+    private val selectionObserver =
+        object : SelectionTracker.SelectionObserver<Long>() {
+            override fun onSelectionChanged() {
+                super.onSelectionChanged()
+                val anySelected = tracker.selection.isEmpty
+                val text = if (anySelected) {
+                    getString(R.string.folders)
+                } else {
+                    "${tracker.selection.size()} selected"
+                }
+                binding.tvTitle.text = text
+                binding.tvTitleCollapsed.text = text
+                handleMenuItems(tracker.selection.size())
+            }
+        }
 
     override fun inflater(
         inflater: LayoutInflater,
@@ -57,6 +74,7 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
     private fun initViews() {
         binding.apply {
             tvTitle.text = getString(R.string.folders)
+            tvTitleCollapsed.text = getString(R.string.folders)
         }
     }
 
@@ -75,13 +93,17 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
             val adapter = BookmarkFolderAdapter()
             this@BookmarkFolderFragment.adapter = adapter
             this.adapter = adapter
-            adapter.selectionTracker = SelectionTracker.Builder(
+            tracker = SelectionTracker.Builder(
                 "folder_selection",
-                this,
-                StableIdKeyProvider<Long>(this),
-                ItemListLookup<Long>(this),
+                binding.rvList,
+                StableIdKeyProvider<Long>(binding.rvList),
+                ItemListLookup<Long>(binding.rvList),
                 StorageStrategy.createLongStorage()
+            ).withSelectionPredicate(
+                SelectionPredicates.createSelectAnything()
             ).build()
+            tracker.addObserver(selectionObserver)
+            adapter.selectionTracker = tracker
             layoutManager = GridLayoutManager(requireContext(), 2).also {
                 addItemDecoration(
                     GridSpacingItemDecoration(
@@ -104,6 +126,21 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
                         BookmarkFolderFragmentDirections.actionBookmarkFolderFragmentToAddBookmarkFolderFragment()
                     )
                 }
+                close.setOnClickListener {
+                    tracker.clearSelection()
+                }
+            }
+        }
+    }
+
+    private fun handleMenuItems(size: Int) {
+        binding.includedMenuList.menuItemsContainer.apply {
+            if (size == 1) {
+                transitionToState(better.text.protext.base.R.id.single)
+            } else if (size > 0) {
+                transitionToState(better.text.protext.base.R.id.multi)
+            } else {
+                transitionToState(better.text.protext.base.R.id.none)
             }
         }
     }

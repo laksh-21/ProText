@@ -5,6 +5,9 @@
     style="@style/FolderListItemCard"
     android:id="@+id/folder_card"
     android:clickable="true"
+    android:checkable="true"
+    app:checkedIconTint="@color/grid_item_icon"
+    app:checkedIcon="@drawable/ic_done"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:focusable="true">

@@ -5,8 +5,8 @@ import androidx.viewpager2.widget.ViewPager2
 import kotlin.math.abs
 
 class ColorPagerPageTransformer(
-    private val offScreenItemVisible: Float = 15f,
-    private val currentItemMargin: Float = 15f,
+    private val offScreenItemVisible: Float,
+    private val currentItemMargin: Float,
 ) : ViewPager2.PageTransformer {
     override fun transformPage(page: View, position: Float) {
         val pageTranslationX = currentItemMargin + offScreenItemVisible
