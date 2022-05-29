@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bubble_blue">#95FFFE</color>
+    <color name="bubblegum_pink">#ffc1cc</color>
+    <color name="sundress_yellow">#FFFAA7</color>
+    <color name="scrapbook_orange">#FFD0A7</color>
+    <color name="giggly_green">#CDFFA7</color>
+    <color name="purpy_purp">#DBA5FF</color>
+    <color name="reed_red">#F2847F</color>
+    <color name="grid_item_text">#1B1A17</color>
+</resources>

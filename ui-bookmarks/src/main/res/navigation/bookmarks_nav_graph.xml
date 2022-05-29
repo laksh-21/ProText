@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_bookmarkFolderFragment_to_bookmarksFragment"
             app:destination="@id/bookmarksFragment" />
+        <action
+            android:id="@+id/action_bookmarkFolderFragment_to_addBookmarkFolderFragment"
+            app:destination="@id/addBookmarkFolderFragment" />
     </fragment>
     <fragment
         android:id="@+id/bookmarksFragment"
@@ -24,4 +27,9 @@
             app:argType="long"
             android:defaultValue="-1L" />
     </fragment>
+    <fragment
+        android:id="@+id/addBookmarkFolderFragment"
+        android:name="better.text.protext.ui.bookmarks.fragments.AddBookmarkFolderFragment"
+        android:label="fragment_add_bookmark_folder"
+        tools:layout="@layout/fragment_add_bookmark_folder" />
 </navigation>

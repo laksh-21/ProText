@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="folder_colors">
+        <item>@color/bubble_blue</item>
+        <item>@color/bubblegum_pink</item>
+        <item>@color/sundress_yellow</item>
+        <item>@color/scrapbook_orange</item>
+        <item>@color/giggly_green</item>
+        <item>@color/purpy_purp</item>
+        <item>@color/reed_red</item>
+    </array>
+</resources>

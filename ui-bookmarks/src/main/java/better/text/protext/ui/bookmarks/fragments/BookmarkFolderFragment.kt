@@ -6,14 +6,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import better.text.protext.base.baseAdapters.ItemListLookup
 import better.text.protext.base.baseAdapters.StableIdKeyProvider
 import better.text.protext.base.baseScreens.BaseFragment
 import better.text.protext.base.databinding.AccessibilityListScreenBinding
+import better.text.protext.base.utils.GridSpacingItemDecoration
 import better.text.protext.ui.bookmarks.R
 import better.text.protext.ui.bookmarks.adapters.BookmarkFolderAdapter
 import better.text.protext.ui.bookmarks.viewmodels.BookmarkFolderViewModel
@@ -26,6 +28,7 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
 
     private val viewModel: BookmarkFolderViewModel by viewModels()
     private lateinit var adapter: BookmarkFolderAdapter
+    private lateinit var navController: NavController
 
     override fun inflater(
         inflater: LayoutInflater,
@@ -35,10 +38,20 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
     }
 
     override fun onCreateView(binding: AccessibilityListScreenBinding, savedInstanceState: Bundle?) {
+        initVariables()
         initViews()
         initViewListeners()
         initFoldersList()
+        initData()
         initObservables()
+    }
+
+    private fun initVariables() {
+        navController = findNavController()
+    }
+
+    private fun initData() {
+        viewModel.getData()
     }
 
     private fun initViews() {
@@ -49,9 +62,11 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
 
     private fun initObservables() {
         lifecycleScope.launch {
-            viewModel.foldersFlow.flowWithLifecycle(lifecycle).collectLatest {
-                adapter.submitData(it)
-            }
+            viewModel.foldersFlow
+                .flowWithLifecycle(lifecycle)
+                .collectLatest {
+                    adapter.submitData(it)
+                }
         }
     }
 
@@ -67,10 +82,29 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
                 ItemListLookup<Long>(this),
                 StorageStrategy.createLongStorage()
             ).build()
-            layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
+            layoutManager = GridLayoutManager(requireContext(), 2).also {
+                addItemDecoration(
+                    GridSpacingItemDecoration(
+                        spacing = requireContext()
+                            .resources
+                            .getDimension(better.text.protext.base.R.dimen.sideMargins)
+                            .toInt(),
+                        spanCount = it.spanCount
+                    )
+                )
+            }
         }
     }
 
     private fun initViewListeners() {
+        binding.apply {
+            includedMenuList.apply {
+                add.setOnClickListener {
+                    navController.navigate(
+                        BookmarkFolderFragmentDirections.actionBookmarkFolderFragmentToAddBookmarkFolderFragment()
+                    )
+                }
+            }
+        }
     }
 }

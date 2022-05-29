@@ -1,5 +1,6 @@
 package better.text.protext.ui.bookmarks.adapters
 
+import android.graphics.Color
 import androidx.recyclerview.selection.SelectionTracker
 import better.text.protext.base.baseAdapters.SelectableViewHolder
 import better.text.protext.localdata.database.entities.BookmarkFolder
@@ -14,6 +15,7 @@ class BookmarkFolderViewHolder(
 ) {
     override fun bind(item: BookmarkFolder) {
         viewBinding.apply {
+            folderCard.setCardBackgroundColor(Color.parseColor(item.folderColor))
             tvFolderName.text = item.folderName
         }
     }

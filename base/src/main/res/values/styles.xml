@@ -17,4 +17,7 @@
     <style name="ListRecyclerView">
         <item name="android:overScrollMode">never</item>
     </style>
+    <style name="FolderListItemCard" parent="Widget.Material3.CardView.Filled">
+        <item name="cardCornerRadius">8dp</item>
+    </style>
 </resources>
