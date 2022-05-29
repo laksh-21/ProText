@@ -4,10 +4,17 @@
         <item name="android:tint">?attr/colorOnBackground</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
-    <style name="ListTitleText" parent="TextAppearance.Material3.HeadlineLarge">
+    <style name="ListTitleTextExpanded" parent="TextAppearance.Material3.HeadlineLarge">
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">2</item>
         <item name="android:textColor">?attr/colorOnBackground</item>
+        <item name="android:textSize">@dimen/pageTitleExpanded</item>
+    </style>
+    <style name="ListTitleTextCollapsed" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+        <item name="android:textSize">@dimen/pageTitleCollapsed</item>
     </style>
     <style name="FolderListTitleText" parent="TextAppearance.Material3.LabelLarge">
         <item name="android:ellipsize">end</item>

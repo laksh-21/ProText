@@ -1,8 +1,10 @@
 package better.text.protext.ui.bookmarks.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -13,13 +15,15 @@ import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
 import androidx.recyclerview.widget.GridLayoutManager
 import better.text.protext.base.baseAdapters.ItemListLookup
-import better.text.protext.base.baseAdapters.StableIdKeyProvider
 import better.text.protext.base.baseScreens.BaseFragment
+import better.text.protext.base.baseScreens.UIEvent
 import better.text.protext.base.databinding.AccessibilityListScreenBinding
 import better.text.protext.base.utils.GridSpacingItemDecoration
 import better.text.protext.ui.bookmarks.R
 import better.text.protext.ui.bookmarks.adapters.BookmarkFolderAdapter
+import better.text.protext.ui.bookmarks.utils.BookmarkIdKeyProvider
 import better.text.protext.ui.bookmarks.viewmodels.BookmarkFolderViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -44,7 +48,14 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
                 binding.tvTitle.text = text
                 binding.tvTitleCollapsed.text = text
                 handleMenuItems(tracker.selection.size())
+                Log.d("Delete", "changed ${tracker.selection.size()}")
             }
+
+//            override fun onSelectionRefresh() {
+//                super.onSelectionRefresh()
+//                Log.d("Delete", "refresh ${tracker.selection.size()}")
+//                handleMenuItems(tracker.selection.size())
+//            }
         }
 
     override fun inflater(
@@ -85,6 +96,16 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
                 .collectLatest {
                     adapter.submitData(it)
                 }
+            viewModel.eventsFlow
+                .flowWithLifecycle(lifecycle)
+                .collectLatest {
+                    when (it) {
+                        is UIEvent.ShowToast -> {
+                            Toast.makeText(requireContext(), it.message, it.duration).show()
+                        }
+                        else -> {}
+                    }
+                }
         }
     }
 
@@ -96,7 +117,7 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
             tracker = SelectionTracker.Builder(
                 "folder_selection",
                 binding.rvList,
-                StableIdKeyProvider<Long>(binding.rvList),
+                BookmarkIdKeyProvider(binding.rvList.adapter as BookmarkFolderAdapter),
                 ItemListLookup<Long>(binding.rvList),
                 StorageStrategy.createLongStorage()
             ).withSelectionPredicate(
@@ -129,8 +150,30 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
                 close.setOnClickListener {
                     tracker.clearSelection()
                 }
+                delete.setOnClickListener {
+                    showDeleteConfirmationDialog()
+                }
+                edit.setOnClickListener {
+                    navController.navigate(
+                        BookmarkFolderFragmentDirections.actionBookmarkFolderFragmentToAddBookmarkFolderFragment(
+                            folderId = tracker.selection.map { it }.first()
+                        )
+                    )
+                }
             }
         }
+    }
+
+    private fun showDeleteConfirmationDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.delete_folder))
+            .setMessage(getString(R.string.delete_folder_warning))
+            .setNegativeButton("No") { _, _ -> }
+            .setPositiveButton("Yes") { _, _ ->
+                val folders = tracker.selection.map { it }
+                viewModel.deleteFolders(folders)
+            }
+            .show()
     }
 
     private fun handleMenuItems(size: Int) {

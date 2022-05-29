@@ -9,7 +9,7 @@
         android:id="@+id/bookmarkFolderFragment"
         android:name="better.text.protext.ui.bookmarks.fragments.BookmarkFolderFragment"
         android:label="fragment_bookmark_folder"
-        tools:layout="@layout/fragment_bookmark_folder" >
+        tools:layout="@layout/accessibility_list_screen" >
         <action
             android:id="@+id/action_bookmarkFolderFragment_to_bookmarksFragment"
             app:destination="@id/bookmarksFragment" />
@@ -31,5 +31,10 @@
         android:id="@+id/addBookmarkFolderFragment"
         android:name="better.text.protext.ui.bookmarks.fragments.AddBookmarkFolderFragment"
         android:label="fragment_add_bookmark_folder"
-        tools:layout="@layout/fragment_add_bookmark_folder" />
+        tools:layout="@layout/fragment_add_bookmark_folder" >
+        <argument
+            android:name="folderId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
 </navigation>

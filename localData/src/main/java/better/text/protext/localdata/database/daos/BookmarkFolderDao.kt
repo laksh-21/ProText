@@ -9,11 +9,14 @@ abstract class BookmarkFolderDao {
     @Query("SELECT * FROM bookmark_folder ORDER BY last_updated DESC")
     abstract fun getAll(): PagingSource<Int, BookmarkFolder>
 
+    @Query("SELECT * FROM bookmark_folder WHERE id = :id")
+    abstract fun get(id: Long): BookmarkFolder
+
     @Insert
     abstract suspend fun addNewFolder(bookmarkFolder: BookmarkFolder)
 
-    @Delete
-    abstract suspend fun deleteFolder(bookmarkFolder: BookmarkFolder): Int
+    @Query("DELETE FROM bookmark_folder WHERE id IN (:bookmarkFolders)")
+    abstract suspend fun deleteFolder(bookmarkFolders: List<Long>): Int
 
     @Update
     abstract suspend fun editFolder(bookmarkFolder: BookmarkFolder): Int

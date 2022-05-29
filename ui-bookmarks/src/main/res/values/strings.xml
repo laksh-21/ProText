@@ -7,4 +7,6 @@
     <string name="preview">Preview</string>
     <string name="add">Add</string>
     <string name="back">Back</string>
+    <string name="delete_folder">Delete Folder</string>
+    <string name="delete_folder_warning">Deleting this folder will delete all bookmarks in this folder as well. Proceed?</string>
 </resources>

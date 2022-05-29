@@ -5,10 +5,11 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import better.text.protext.base.baseScreens.BaseViewModel
-import better.text.protext.interactors.bookmarks.AddBookmarkFolderUseCase
+import better.text.protext.base.baseScreens.UIEvent
+import better.text.protext.base.results.InvokeStatus
+import better.text.protext.interactors.bookmarks.DeleteBookmarkFoldersUseCase
 import better.text.protext.interactors.bookmarks.GetAllBookmarkFoldersUseCase
 import better.text.protext.localdata.database.entities.BookmarkFolder
-import better.text.protext.localdata.database.utils.TimeConverter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -18,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BookmarkFolderViewModel @Inject constructor(
     private val getAllBookmarkFoldersUseCase: GetAllBookmarkFoldersUseCase,
-    private val addBookmarkFolderUseCase: AddBookmarkFolderUseCase
+    private val deleteBookmarkFoldersUseCase: DeleteBookmarkFoldersUseCase
 ) : BaseViewModel() {
     val foldersFlow: Flow<PagingData<BookmarkFolder>> =
         getAllBookmarkFoldersUseCase.flow.cachedIn(viewModelScope)
@@ -34,17 +35,17 @@ class BookmarkFolderViewModel @Inject constructor(
         )
     }
 
-    fun addFolder() {
+    fun deleteFolders(bookmarkFolders: List<Long>) {
         viewModelScope.launch {
-            addBookmarkFolderUseCase(
-                AddBookmarkFolderUseCase.Params(
-                    BookmarkFolder(
-                        folderName = "New folder",
-                        folderColor = "#FFDBE2",
-                        lastUpdated = TimeConverter().toUpdateTime(Date().time)
-                    )
+            deleteBookmarkFoldersUseCase(
+                DeleteBookmarkFoldersUseCase.Params(
+                    bookmarkFolders = bookmarkFolders
                 )
             ).collect {
+                when (it) {
+                    is InvokeStatus.Failure -> sendEvent(UIEvent.ShowToast("Something went wrong."))
+                    else -> {}
+                }
             }
         }
     }
