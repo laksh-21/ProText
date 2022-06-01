@@ -16,6 +16,9 @@
         <item name="android:textColor">?attr/colorOnBackground</item>
         <item name="android:textSize">@dimen/pageTitleCollapsed</item>
     </style>
+    <style name="PageContentText" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
     <style name="FolderListTitleText" parent="TextAppearance.Material3.LabelLarge">
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">2</item>
@@ -26,5 +29,25 @@
     </style>
     <style name="FolderListItemCard" parent="Widget.Material3.CardView.Filled">
         <item name="cardCornerRadius">8dp</item>
+        <item name="cardBackgroundColor">?attr/colorSurface</item>
+    </style>
+    <style name="ListItemTitleText" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+    <style name="ListItemBodyText" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+    <style name="ListItemTimeText" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:alpha">0.5</item>
     </style>
 </resources>

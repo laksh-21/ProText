@@ -8,13 +8,15 @@ import better.text.protext.base.baseAdapters.SelectablePagedAdapter
 import better.text.protext.localdata.database.entities.BookmarkFolder
 import better.text.protext.ui.bookmarks.databinding.BookmarkFolderGridItemBinding
 
-class BookmarkFolderAdapter : SelectablePagedAdapter<BookmarkFolder, Long>(diffCallback) {
+class BookmarkFolderAdapter(
+    private val onItemClick: (BookmarkFolder) -> Unit
+) : SelectablePagedAdapter<BookmarkFolder, Long>(diffCallback) {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
         item?.let {
             (holder as BookmarkFolderViewHolder).apply {
                 this.item = item
-                bind(item)
+                bind(item, onItemClick)
             }
         }
     }

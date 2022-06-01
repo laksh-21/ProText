@@ -1,7 +1,6 @@
 package better.text.protext.ui.bookmarks.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -19,9 +18,10 @@ import better.text.protext.base.baseScreens.BaseFragment
 import better.text.protext.base.baseScreens.UIEvent
 import better.text.protext.base.databinding.AccessibilityListScreenBinding
 import better.text.protext.base.utils.GridSpacingItemDecoration
+import better.text.protext.localdata.database.entities.BookmarkFolder
 import better.text.protext.ui.bookmarks.R
 import better.text.protext.ui.bookmarks.adapters.BookmarkFolderAdapter
-import better.text.protext.ui.bookmarks.utils.BookmarkIdKeyProvider
+import better.text.protext.ui.bookmarks.utils.BookmarkFolderIdKeyProvider
 import better.text.protext.ui.bookmarks.viewmodels.BookmarkFolderViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,14 +48,7 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
                 binding.tvTitle.text = text
                 binding.tvTitleCollapsed.text = text
                 handleMenuItems(tracker.selection.size())
-                Log.d("Delete", "changed ${tracker.selection.size()}")
             }
-
-//            override fun onSelectionRefresh() {
-//                super.onSelectionRefresh()
-//                Log.d("Delete", "refresh ${tracker.selection.size()}")
-//                handleMenuItems(tracker.selection.size())
-//            }
         }
 
     override fun inflater(
@@ -111,13 +104,17 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
 
     private fun initFoldersList() {
         binding.rvList.apply {
-            val adapter = BookmarkFolderAdapter()
+            val adapter = BookmarkFolderAdapter(
+                onItemClick = {
+                    handledItemClick(it)
+                }
+            )
             this@BookmarkFolderFragment.adapter = adapter
             this.adapter = adapter
             tracker = SelectionTracker.Builder(
                 "folder_selection",
                 binding.rvList,
-                BookmarkIdKeyProvider(binding.rvList.adapter as BookmarkFolderAdapter),
+                BookmarkFolderIdKeyProvider(binding.rvList.adapter as BookmarkFolderAdapter),
                 ItemListLookup<Long>(binding.rvList),
                 StorageStrategy.createLongStorage()
             ).withSelectionPredicate(
@@ -137,6 +134,15 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
                 )
             }
         }
+    }
+
+    private fun handledItemClick(bookmarkFolder: BookmarkFolder) {
+        navController.navigate(
+            BookmarkFolderFragmentDirections
+                .actionBookmarkFolderFragmentToBookmarksFragment(
+                    folderId = bookmarkFolder.id
+                )
+        )
     }
 
     private fun initViewListeners() {

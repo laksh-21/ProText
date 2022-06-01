@@ -13,11 +13,17 @@ class BookmarkFolderViewHolder(
     binding = viewBinding,
     tracker = selectionTracker
 ) {
-    override fun bind(item: BookmarkFolder) {
+    override fun bind(
+        item: BookmarkFolder,
+        onItemClick: (BookmarkFolder) -> Unit
+    ) {
         viewBinding.apply {
             folderCard.setCardBackgroundColor(Color.parseColor(item.folderColor))
             tvFolderName.text = item.folderName
             folderCard.isChecked = selectionTracker.isSelected(itemId)
+            folderCard.setOnClickListener {
+                onItemClick(item)
+            }
         }
     }
 

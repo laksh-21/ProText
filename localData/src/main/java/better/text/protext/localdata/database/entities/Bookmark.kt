@@ -3,6 +3,7 @@ package better.text.protext.localdata.database.entities
 import androidx.room.*
 import better.text.protext.localdata.database.utils.TimeConverter
 import better.text.protext.localdata.database.utils.UpdateTime
+import java.util.*
 
 @Entity(
     tableName = "bookmark",
@@ -23,7 +24,8 @@ data class Bookmark(
     @PrimaryKey(autoGenerate = true) val id: Long,
     @ColumnInfo(name = "bookmark_title") val bookmarkTitle: String,
     @ColumnInfo(name = "bookmark_url") val bookmarkUrl: String,
-    @ColumnInfo(name = "bookmark_folder_id") val bookmarkFolderId: Int,
+    @ColumnInfo(name = "bookmark_folder_id") val bookmarkFolderId: Long,
     @TypeConverters(TimeConverter::class)
-    @ColumnInfo(name = "last_updated") val lastUpdated: UpdateTime,
+    @ColumnInfo(name = "last_updated") val lastUpdated: UpdateTime =
+        TimeConverter().toUpdateTime(Date().time),
 )

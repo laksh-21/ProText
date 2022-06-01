@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/item_card"
+    android:focusable="true"
+    android:clickable="true"
+    android:checkable="true"
+    app:checkedIcon="@null"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/FolderListItemCard">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/sideMargins">
+
+        <TextView
+            android:id="@+id/tv_bookmark_title"
+            style="@style/ListItemTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/iv_website"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/tv_link"
+            style="@style/ListItemBodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_time"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@+id/iv_website"
+            app:layout_constraintTop_toBottomOf="@+id/tv_bookmark_title"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Link" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/ListItemTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_link"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_link"
+            app:layout_constraintTop_toTopOf="@+id/tv_link"
+            tools:text="Time" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_website"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Tooltip"
+            app:srcCompat="@color/image_placeholder" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -86,6 +86,11 @@ class AddBookmarkFolderFragment :
     }
 
     private fun initViews() {
+        binding.tvTitleCollapsed.text = if (navArgs.folderId != -1L) {
+            getString(R.string.edit_a_folder)
+        } else {
+            getString(R.string.add_a_folder)
+        }
         binding.btnAddBookmark.isEnabled = false
         val label = if (navArgs.folderId != -1L) "Edit" else "Add"
         binding.btnAddBookmark.text = label

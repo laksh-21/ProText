@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/add_a_folder"
+        style="@style/ListTitleTextCollapsed"
         app:layout_constraintBottom_toBottomOf="@+id/btn_back"
         app:layout_constraintEnd_toStartOf="@+id/right_margin"
         app:layout_constraintHorizontal_bias="0.0"
@@ -59,6 +60,7 @@
 
     <TextView
         android:id="@+id/textView3"
+        style="@style/PageContentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -68,6 +70,7 @@
 
     <TextView
         android:id="@+id/textView4"
+        style="@style/PageContentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
