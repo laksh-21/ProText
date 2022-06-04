@@ -48,6 +48,9 @@ dependencies {
     // rv selection
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
 
+    // coil
+    implementation("io.coil-kt:coil:2.1.0")
+
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("com.google.android.material:material:1.6.0")

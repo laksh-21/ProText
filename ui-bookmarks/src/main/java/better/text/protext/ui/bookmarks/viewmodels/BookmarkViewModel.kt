@@ -7,6 +7,7 @@ import androidx.paging.cachedIn
 import better.text.protext.base.baseScreens.BaseViewModel
 import better.text.protext.base.results.InvokeStatus
 import better.text.protext.interactors.bookmarks.AddBookmarkUseCase
+import better.text.protext.interactors.bookmarks.DeleteBookmarksUseCase
 import better.text.protext.interactors.bookmarks.GetBookmarksByFolderUseCase
 import better.text.protext.interactors.bookmarks.GotBookmarkFolderByIdUseCase
 import better.text.protext.localdata.database.entities.Bookmark
@@ -22,7 +23,8 @@ import javax.inject.Inject
 class BookmarkViewModel @Inject constructor(
     private val addBookmarkUseCase: AddBookmarkUseCase,
     private val getBookmarksByFolderUseCase: GetBookmarksByFolderUseCase,
-    private val getBookmarkFolderByIdUseCase: GotBookmarkFolderByIdUseCase
+    private val getBookmarkFolderByIdUseCase: GotBookmarkFolderByIdUseCase,
+    private val deleteBookmarksUseCase: DeleteBookmarksUseCase
 ) : BaseViewModel() {
 
     val bookmarks: Flow<PagingData<Bookmark>> = getBookmarksByFolderUseCase.flow.cachedIn(viewModelScope)
@@ -32,15 +34,18 @@ class BookmarkViewModel @Inject constructor(
     val bookmarkFolder: StateFlow<BookmarkFolder> = _bookmarkFolder
     private var folderId: Long = -1L
 
-    fun addBookmark() {
+    fun addBookmark(
+        title: String,
+        url: String
+    ) {
         if (folderId == -1L) return
         viewModelScope.launch {
             addBookmarkUseCase(
                 AddBookmarkUseCase.Params(
                     bookmark = Bookmark(
                         0L,
-                        "Test",
-                        "Url boy",
+                        title,
+                        url,
                         folderId
                     )
                 )
@@ -77,6 +82,17 @@ class BookmarkViewModel @Inject constructor(
                     is InvokeStatus.Success -> _bookmarkFolder.emit(it.data)
                     else -> {}
                 }
+            }
+        }
+    }
+
+    fun deleteBookmarks(bookmarks: List<Long>) {
+        viewModelScope.launch {
+            deleteBookmarksUseCase(
+                DeleteBookmarksUseCase.Params(
+                    bookmarks = bookmarks
+                )
+            ).collect {
             }
         }
     }

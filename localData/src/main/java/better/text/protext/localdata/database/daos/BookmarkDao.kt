@@ -15,8 +15,8 @@ abstract class BookmarkDao {
     @Insert
     abstract suspend fun addBookmark(bookmark: Bookmark)
 
-    @Delete
-    abstract suspend fun deleteBookmark(bookmark: Bookmark): Int
+    @Query("DELETE FROM bookmark WHERE id IN (:bookmarks)")
+    abstract suspend fun deleteBookmarks(bookmarks: List<Long>): Int
 
     @Update
     abstract suspend fun editBookmark(bookmark: Bookmark): Int

@@ -20,8 +20,8 @@ class BookmarkRepoImpl @Inject constructor(
         bookmarkDao.editBookmark(bookmark)
     }
 
-    override suspend fun deleteBookmark(bookmark: Bookmark) {
-        bookmarkDao.deleteBookmark(bookmark)
+    override suspend fun deleteBookmarks(bookmarks: List<Long>) {
+        bookmarkDao.deleteBookmarks(bookmarks)
     }
 
     override suspend fun addBookmark(bookmark: Bookmark) {

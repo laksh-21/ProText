@@ -3,10 +3,8 @@ package better.text.protext.repository
 import better.text.protext.localdata.database.daos.BookmarkDao
 import better.text.protext.localdata.database.daos.BookmarkFolderDao
 import better.text.protext.localdata.database.daos.CopiedTextDao
-import better.text.protext.repository.bookmarks.BookmarkFolderRepo
-import better.text.protext.repository.bookmarks.BookmarkFolderRepoImpl
-import better.text.protext.repository.bookmarks.BookmarkRepo
-import better.text.protext.repository.bookmarks.BookmarkRepoImpl
+import better.text.protext.remotedata.bookmarks.WebsiteDao
+import better.text.protext.repository.bookmarks.*
 import better.text.protext.repository.copiedTexts.CopiedTextRepo
 import better.text.protext.repository.copiedTexts.CopiedTextRepoImpl
 import dagger.Module
@@ -28,5 +26,9 @@ object RepositoryModule {
     @Provides
     fun provideCopiedTextRepo(dao: CopiedTextDao): CopiedTextRepo {
         return CopiedTextRepoImpl(dao)
+    }
+    @Provides
+    fun providesWebsiteInfoRepo(dao: WebsiteDao): WebsiteInfoRepo {
+        return WebsiteInfoRepoImpl(dao)
     }
 }

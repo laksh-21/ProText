@@ -20,8 +20,14 @@ class BookmarksAdapter(
             (holder as BookmarksViewHolder).apply {
                 this.item = item
                 bind(item, onItemClick)
+                attachTransitionListener()
             }
         }
+    }
+
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        super.onViewRecycled(holder)
+        (holder as BookmarksViewHolder).detachTransitionListener()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

@@ -38,14 +38,14 @@
         app:constraint_referenced_ids="btn_back,tv_title_collapsed" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/input_layout_first"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-        android:layout_width="377dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toStartOf="@+id/right_margin"
         app:layout_constraintStart_toStartOf="@+id/left_margin"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/tv_add_title"
         app:placeholderText="Enter a folder name">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -59,7 +59,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tv_add_title"
         style="@style/PageContentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/preview"
         app:layout_constraintStart_toStartOf="@+id/left_margin"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/input_layout_first" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/left_margin"

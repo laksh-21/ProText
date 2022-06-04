@@ -6,7 +6,7 @@
     <Transition
         motion:constraintSetEnd="@+id/single"
         motion:constraintSetStart="@id/none"
-        motion:duration="500">
+        motion:duration="@integer/selectionAnimationDuration">
        <KeyFrameSet>
        </KeyFrameSet>
     </Transition>
@@ -155,5 +155,10 @@
     </ConstraintSet>
     <Transition
         motion:constraintSetStart="@+id/single"
-        motion:constraintSetEnd="@+id/multi" />
+        motion:constraintSetEnd="@+id/multi"
+        motion:duration="@integer/selectionAnimationDuration" />
+    <Transition
+        motion:constraintSetStart="@+id/none"
+        motion:constraintSetEnd="@+id/multi"
+        motion:duration="@integer/selectionAnimationDuration" />
 </MotionScene>

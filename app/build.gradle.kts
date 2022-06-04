@@ -47,6 +47,7 @@ dependencies {
     implementation(project(mapOf("path" to ":interactors")))
     implementation(project(mapOf("path" to ":repository")))
     implementation(project(mapOf("path" to ":localData")))
+    implementation(project(mapOf("path" to ":remoteData")))
 //    implementation(project(mapOf("path" to ":base")))
     kapt("com.google.dagger:hilt-android-compiler:2.41")
 

@@ -26,6 +26,9 @@
             android:name="folderId"
             app:argType="long"
             android:defaultValue="-1L" />
+        <action
+            android:id="@+id/action_bookmarksFragment_to_addBookmarkDialogFragment"
+            app:destination="@id/addBookmarkDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/addBookmarkFolderFragment"
@@ -37,4 +40,8 @@
             app:argType="long"
             android:defaultValue="-1L" />
     </fragment>
+    <dialog
+        android:id="@+id/addBookmarkDialogFragment"
+        android:name="better.text.protext.ui.bookmarks.fragments.AddBookmarkDialogFragment"
+        android:label="AddBookmarkDialogFragment" />
 </navigation>

@@ -3,13 +3,13 @@ package better.text.protext.ui.bookmarks.fragments
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.navigateUp
 import androidx.recyclerview.selection.SelectionPredicates
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
@@ -18,7 +18,6 @@ import better.text.protext.base.baseAdapters.ItemListLookup
 import better.text.protext.base.baseScreens.BaseFragment
 import better.text.protext.base.databinding.AccessibilityBackListScreenBinding
 import better.text.protext.localdata.database.entities.BookmarkFolder
-import better.text.protext.ui.bookmarks.R
 import better.text.protext.ui.bookmarks.adapters.BookmarksAdapter
 import better.text.protext.ui.bookmarks.utils.BookmarkIdKeyProvider
 import better.text.protext.ui.bookmarks.viewmodels.BookmarkViewModel
@@ -67,7 +66,16 @@ class BookmarksFragment :
         binding.apply {
             this.includedMenuList.apply {
                 add.setOnClickListener {
-                    viewModel.addBookmark()
+                    navController.navigate(
+                        BookmarksFragmentDirections.actionBookmarksFragmentToAddBookmarkDialogFragment()
+                    )
+                }
+                delete.setOnClickListener {
+                    val folders = tracker.selection.map { it }
+                    viewModel.deleteBookmarks(folders)
+                }
+                close.setOnClickListener {
+                    tracker.clearSelection()
                 }
             }
             back.setOnClickListener {
@@ -118,6 +126,16 @@ class BookmarksFragment :
                     }
                 }
         }
+        setFragmentResultListener(RESULT_REQUEST_KEY) { _, bundle ->
+            val title = bundle.getString(RESULT_TITLE_KEY)
+            val url = bundle.getString(RESULT_URL_KEY)
+            if (title != null && url != null) {
+                viewModel.addBookmark(
+                    title = title,
+                    url = url
+                )
+            }
+        }
     }
 
     private fun initData() {
@@ -152,5 +170,11 @@ class BookmarksFragment :
         container: ViewGroup?
     ): AccessibilityBackListScreenBinding {
         return AccessibilityBackListScreenBinding.inflate(inflater, container, false)
+    }
+
+    companion object {
+        const val RESULT_REQUEST_KEY = "bookmark_request"
+        const val RESULT_TITLE_KEY = "bookmark_request_title"
+        const val RESULT_URL_KEY = "bookmark_request_url"
     }
 }

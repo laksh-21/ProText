@@ -4,4 +4,5 @@
     <item name="iconButtonSize" type="dimen">48dp</item>
     <item name="pageTitleExpanded" type="dimen">32sp</item>
     <item name="pageTitleCollapsed" type="dimen">20sp</item>
+    <item name="selectionAnimationDuration" type="integer">250</item>
 </resources>

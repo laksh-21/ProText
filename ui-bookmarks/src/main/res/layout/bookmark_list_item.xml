@@ -12,15 +12,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/FolderListItemCard">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/sideMargins">
+        android:padding="@dimen/sideMargins"
+        app:layoutDescription="@xml/bookmark_list_item_xml_constraintlayout_scene">
 
         <TextView
             android:id="@+id/tv_bookmark_title"
             style="@style/ListItemTitleText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +34,7 @@
         <TextView
             android:id="@+id/tv_link"
             style="@style/ListItemBodyText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
@@ -60,10 +62,11 @@
             android:id="@+id/iv_website"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            app:contentPadding="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Tooltip"
             app:srcCompat="@color/image_placeholder" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </com.google.android.material.card.MaterialCardView>
