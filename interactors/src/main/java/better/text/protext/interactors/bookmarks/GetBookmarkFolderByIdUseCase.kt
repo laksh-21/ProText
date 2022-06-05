@@ -8,10 +8,10 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class GotBookmarkFolderByIdUseCase @Inject constructor(
+class GetBookmarkFolderByIdUseCase @Inject constructor(
     private val bookmarkFolderDao: BookmarkFolderDao,
     @IODispatcher val coroutineDispatcher: CoroutineDispatcher
-) : Interactors.SuspendUseCase<GotBookmarkFolderByIdUseCase.Params, BookmarkFolder>() {
+) : Interactors.SuspendUseCase<GetBookmarkFolderByIdUseCase.Params, BookmarkFolder>() {
     data class Params(
         val folderId: Long
     )

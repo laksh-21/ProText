@@ -3,6 +3,7 @@ package better.text.protext.ui.bookmarks.fragments
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -16,6 +17,7 @@ import androidx.recyclerview.selection.StorageStrategy
 import androidx.recyclerview.widget.LinearLayoutManager
 import better.text.protext.base.baseAdapters.ItemListLookup
 import better.text.protext.base.baseScreens.BaseFragment
+import better.text.protext.base.baseScreens.UIEvent
 import better.text.protext.base.databinding.AccessibilityBackListScreenBinding
 import better.text.protext.localdata.database.entities.BookmarkFolder
 import better.text.protext.ui.bookmarks.adapters.BookmarksAdapter
@@ -31,6 +33,7 @@ class BookmarksFragment :
 
     private val viewModel: BookmarkViewModel by viewModels()
     private val navArgs: BookmarksFragmentArgs by navArgs()
+    private var editableId: Long = -1L
     private lateinit var navController: NavController
     private lateinit var adapter: BookmarksAdapter
     private lateinit var tracker: SelectionTracker<Long>
@@ -76,6 +79,13 @@ class BookmarksFragment :
                 }
                 close.setOnClickListener {
                     tracker.clearSelection()
+                }
+                edit.setOnClickListener {
+                    val id = tracker.selection.map { it }.first()
+                    editableId = id
+                    navController.navigate(
+                        BookmarksFragmentDirections.actionBookmarksFragmentToAddBookmarkDialogFragment(id)
+                    )
                 }
             }
             back.setOnClickListener {
@@ -126,7 +136,16 @@ class BookmarksFragment :
                     }
                 }
         }
-        setFragmentResultListener(RESULT_REQUEST_KEY) { _, bundle ->
+        lifecycleScope.launch {
+            viewModel.eventsFlow.flowWithLifecycle(lifecycle).collectLatest {
+                when (it) {
+                    is UIEvent.ClearSelections -> tracker.clearSelection()
+                    is UIEvent.ShowToast -> Toast.makeText(requireContext(), it.message, it.duration).show()
+                    else -> {}
+                }
+            }
+        }
+        setFragmentResultListener(RESULT_REQUEST_ADD_KEY) { _, bundle ->
             val title = bundle.getString(RESULT_TITLE_KEY)
             val url = bundle.getString(RESULT_URL_KEY)
             if (title != null && url != null) {
@@ -134,6 +153,20 @@ class BookmarksFragment :
                     title = title,
                     url = url
                 )
+            }
+        }
+        setFragmentResultListener(RESULT_REQUEST_EDIT_KEY) { _, bundle ->
+            val title = bundle.getString(RESULT_TITLE_KEY)
+            val url = bundle.getString(RESULT_URL_KEY)
+            if (title != null && url != null) {
+                if (editableId != -1L) {
+                    viewModel.updateBookmark(
+                        bookmarkTitle = title,
+                        bookmarkUrl = url,
+                        id = editableId
+                    )
+                }
+                editableId = -1L
             }
         }
     }
@@ -173,7 +206,8 @@ class BookmarksFragment :
     }
 
     companion object {
-        const val RESULT_REQUEST_KEY = "bookmark_request"
+        const val RESULT_REQUEST_ADD_KEY = "bookmark_request_add"
+        const val RESULT_REQUEST_EDIT_KEY = "bookmark_request_edit"
         const val RESULT_TITLE_KEY = "bookmark_request_title"
         const val RESULT_URL_KEY = "bookmark_request_url"
     }

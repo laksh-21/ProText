@@ -12,6 +12,9 @@ abstract class BookmarkDao {
     @Query("SELECT * FROM bookmark WHERE bookmark_folder_id = :folderId ORDER BY last_updated DESC")
     abstract fun getAllFromFolder(folderId: Long): PagingSource<Int, Bookmark>
 
+    @Query("SELECT * FROM bookmark WHERE id = :bookmarkId")
+    abstract fun getBookmarkById(bookmarkId: Long): Bookmark
+
     @Insert
     abstract suspend fun addBookmark(bookmark: Bookmark)
 

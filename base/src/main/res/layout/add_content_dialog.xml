@@ -47,6 +47,7 @@
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:endIconMode="clear_text"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toStartOf="@+id/right_guideline"
         app:layout_constraintStart_toStartOf="@+id/left_guideline"
@@ -80,6 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:helperTextEnabled="true"
+        app:endIconMode="clear_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/right_guideline"
         app:layout_constraintStart_toStartOf="@+id/left_guideline"
@@ -112,7 +114,7 @@
         style="@style/ListTitleTextCollapsed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@string/add_a_bookmark"
+        tools:text="Add a bookmark"
         app:layout_constraintStart_toStartOf="@+id/left_guideline"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

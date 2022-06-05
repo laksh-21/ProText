@@ -16,6 +16,10 @@ class BookmarkRepoImpl @Inject constructor(
         return bookmarkDao.getAllFromFolder(folderId)
     }
 
+    override fun getBookmarkById(bookmarkId: Long): Bookmark {
+        return bookmarkDao.getBookmarkById(bookmarkId)
+    }
+
     override suspend fun editBookmark(bookmark: Bookmark) {
         bookmarkDao.editBookmark(bookmark)
     }

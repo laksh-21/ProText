@@ -5,7 +5,7 @@ import better.text.protext.base.baseScreens.BaseViewModel
 import better.text.protext.base.baseScreens.UIEvent
 import better.text.protext.base.results.InvokeStatus
 import better.text.protext.interactors.bookmarks.AddBookmarkFolderUseCase
-import better.text.protext.interactors.bookmarks.GotBookmarkFolderByIdUseCase
+import better.text.protext.interactors.bookmarks.GetBookmarkFolderByIdUseCase
 import better.text.protext.interactors.bookmarks.UpdateBookmarkFolderUseCase
 import better.text.protext.localdata.database.entities.BookmarkFolder
 import better.text.protext.localdata.database.utils.TimeConverter
@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AddBookmarkFolderViewModel @Inject constructor(
     private val addBookmarkFolderUseCase: AddBookmarkFolderUseCase,
-    private val getBookmarkFolderByIdUseCase: GotBookmarkFolderByIdUseCase,
+    private val getBookmarkFolderByIdUseCase: GetBookmarkFolderByIdUseCase,
     private val updateBookmarkFolderUseCase: UpdateBookmarkFolderUseCase
 ) : BaseViewModel() {
 
@@ -101,7 +101,7 @@ class AddBookmarkFolderViewModel @Inject constructor(
     fun getBookmarkFolder(folderId: Long) {
         viewModelScope.launch {
             getBookmarkFolderByIdUseCase(
-                GotBookmarkFolderByIdUseCase.Params(
+                GetBookmarkFolderByIdUseCase.Params(
                     folderId = folderId
                 )
             ).collect {

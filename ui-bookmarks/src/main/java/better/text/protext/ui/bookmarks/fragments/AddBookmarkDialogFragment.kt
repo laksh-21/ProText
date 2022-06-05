@@ -9,10 +9,12 @@ import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import better.text.protext.base.baseScreens.BaseBottomSheetDialog
 import better.text.protext.base.databinding.AddContentDialogBinding
 import better.text.protext.base.utils.Validators
 import better.text.protext.base.utils.getFromClipboard
+import better.text.protext.localdata.database.entities.Bookmark
 import better.text.protext.ui.bookmarks.R
 import better.text.protext.ui.bookmarks.viewmodels.AddBookmarkViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,11 +27,21 @@ class AddBookmarkDialogFragment :
 
     private val viewModel: AddBookmarkViewModel by viewModels()
     private var copiedLink: String? = null
+    private val navArgs: AddBookmarkDialogFragmentArgs by navArgs()
+    private val isEdit: Boolean
+        get() = navArgs.bookmarkId != -1L
 
     override fun onViewCreated(binding: AddContentDialogBinding, savedInstanceState: Bundle?) {
         initViewListeners()
         initViews()
+        initData()
         initObservers()
+    }
+
+    private fun initData() {
+        if (isEdit) {
+            viewModel.getBookmark(navArgs.bookmarkId)
+        }
     }
 
     private fun initViewListeners() {
@@ -49,13 +61,37 @@ class AddBookmarkDialogFragment :
             btnDone.setOnClickListener {
                 if (validateForm()) {
                     val result = bundleOf().apply {
-                        putString(BookmarksFragment.RESULT_TITLE_KEY, binding.inputFirst.text.toString())
-                        putString(BookmarksFragment.RESULT_URL_KEY, binding.inputSecond.text.toString())
+                        putString(
+                            BookmarksFragment.RESULT_TITLE_KEY,
+                            binding.inputFirst.text.toString()
+                        )
+                        putString(
+                            BookmarksFragment.RESULT_URL_KEY,
+                            binding.inputSecond.text.toString()
+                        )
                     }
+                    val requestKey = if (isEdit) BookmarksFragment.RESULT_REQUEST_EDIT_KEY else BookmarksFragment.RESULT_REQUEST_ADD_KEY
                     setFragmentResult(
-                        requestKey = BookmarksFragment.RESULT_REQUEST_KEY,
+                        requestKey = requestKey,
                         result = result
                     )
+//                    if (isEdit) {
+//                    } else {
+//                        val result = bundleOf().apply {
+//                            putString(
+//                                BookmarksFragment.RESULT_TITLE_KEY,
+//                                binding.inputFirst.text.toString()
+//                            )
+//                            putString(
+//                                BookmarksFragment.RESULT_URL_KEY,
+//                                binding.inputSecond.text.toString()
+//                            )
+//                        }
+//                        setFragmentResult(
+//                            requestKey = BookmarksFragment.RESULT_REQUEST_ADD_KEY,
+//                            result = result
+//                        )
+//                    }
                     dismiss()
                 }
             }
@@ -84,15 +120,37 @@ class AddBookmarkDialogFragment :
                 }
             }
         }
+        lifecycleScope.launch {
+            viewModel.bookmark.flowWithLifecycle(lifecycle).collectLatest {
+                if (it.id != -1L) {
+                    populateData(it)
+                }
+            }
+        }
+    }
+
+    private fun populateData(bookmark: Bookmark) {
+        binding.apply {
+            inputFirst.setText(bookmark.bookmarkTitle)
+            inputSecond.setText(bookmark.bookmarkUrl)
+        }
     }
 
     private fun initViews() {
         binding.apply {
-            tvAddTitle.text = getString(better.text.protext.base.R.string.add_a_bookmark)
+            tvAddTitle.text = if (!isEdit) getString(R.string.add_a_bookmark)
+            else
+                getString(R.string.edit_a_bookmark)
             tvAddFirst.text = getString(better.text.protext.base.R.string.title)
             tvAddSecond.text = getString(better.text.protext.base.R.string.link)
-            val copiedText = requireContext().getFromClipboard()
-            initUrlField(copiedText)
+            if (!isEdit) {
+                val copiedText = requireContext().getFromClipboard()
+                initUrlField(copiedText)
+            }
+            btnDone.text = if (!isEdit) getString(better.text.protext.base.R.string.add)
+            else
+                getString(better.text.protext.base.R.string.edit)
+            btnDone.isEnabled = false
         }
     }
 
