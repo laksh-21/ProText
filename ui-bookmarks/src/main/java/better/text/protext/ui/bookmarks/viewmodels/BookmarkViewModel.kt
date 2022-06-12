@@ -10,7 +10,6 @@ import better.text.protext.base.results.InvokeStatus
 import better.text.protext.interactors.bookmarks.*
 import better.text.protext.localdata.database.entities.Bookmark
 import better.text.protext.localdata.database.entities.BookmarkFolder
-import better.text.protext.localdata.database.utils.TimeConverter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -117,7 +116,7 @@ class BookmarkViewModel @Inject constructor(
                         bookmarkFolderId = folderId,
                         bookmarkTitle = bookmarkTitle,
                         bookmarkUrl = bookmarkUrl,
-                        lastUpdated = TimeConverter().toUpdateTime(Date().time)
+                        lastUpdated = Date().time
                     )
                 )
             ).collect {

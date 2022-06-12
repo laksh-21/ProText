@@ -6,6 +6,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.recyclerview.selection.SelectionTracker
 import better.text.protext.base.baseAdapters.SelectableViewHolder
+import better.text.protext.base.utils.TimeHelpers
 import better.text.protext.base.utils.Validators
 import better.text.protext.localdata.database.entities.Bookmark
 import better.text.protext.ui.bookmarks.R
@@ -66,7 +67,7 @@ class BookmarksViewHolder(
         binding.apply {
             tvBookmarkTitle.text = item.bookmarkTitle
             tvLink.text = item.bookmarkUrl
-            tvTime.text = item.lastUpdated.stringDate
+            tvTime.text = TimeHelpers.getTimeString(item.lastUpdated)
             itemCard.setOnClickListener {
                 onItemClick(item)
             }

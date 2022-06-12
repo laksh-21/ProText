@@ -1,14 +1,17 @@
 package better.text.protext.ui.bookmarks.activities
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import better.text.protext.base.utils.PermissionHelper
 import better.text.protext.base.utils.Validators
 import better.text.protext.ui.bookmarks.R
 import better.text.protext.ui.bookmarks.services.BookmarkService
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class BookmarksActivity : AppCompatActivity() {
 
@@ -37,17 +40,41 @@ class BookmarksActivity : AppCompatActivity() {
 
     private fun setupPermissionHelper() {
         permissionHelper = PermissionHelper(activityResultRegistry) {
-            launchService()
+            if (it) launchService()
+            else {
+                Toast.makeText(this, "Could not get required permission", Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
         lifecycle.addObserver(permissionHelper)
+        permissionHelper.onCreate(this)
     }
 
     private fun checkForOverlayPermission() {
         if (Settings.canDrawOverlays(this)) {
             launchService()
         } else {
-            permissionHelper.requestPermission(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+            showPermissionDialog()
         }
+    }
+
+    private fun showPermissionDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.no_permission))
+            .setMessage(getString(R.string.grant_permission))
+            .setNegativeButton("Reject") { _, _ ->
+                finish()
+            }
+            .setPositiveButton("Allow") { _, _ ->
+                requestOverlayPermission()
+            }
+            .show()
+    }
+
+    private fun requestOverlayPermission() {
+        permissionHelper.requestSystemPermission(
+            Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package: $packageName"))
+        )
     }
 
     private fun launchService() {

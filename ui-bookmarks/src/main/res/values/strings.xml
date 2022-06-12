@@ -15,4 +15,6 @@
     <string name="url">URL</string>
     <string name="enter_a_title_for_the_bookmark">Enter a title for the bookmark</string>
     <string name="title">Title</string>
+    <string name="no_permission">No permission</string>
+    <string name="grant_permission">To be able to show an add bookmark screen we need proper permissions</string>
 </resources>
