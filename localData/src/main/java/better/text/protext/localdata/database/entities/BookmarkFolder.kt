@@ -13,8 +13,8 @@ import java.util.*
 )
 data class BookmarkFolder(
     @PrimaryKey(autoGenerate = true) val id: Long = 0L,
-    @ColumnInfo(name = "folder_name", defaultValue = "") val folderName: String,
-    @ColumnInfo(name = "folder_color", defaultValue = "#ffffff") val folderColor: String,
+    @ColumnInfo(name = "folder_name") val folderName: String,
+    @ColumnInfo(name = "folder_color") val folderColor: String,
     @TypeConverters(TimeConverter::class)
     @ColumnInfo(name = "last_updated") val lastUpdated: UpdateTime = TimeConverter()
         .toUpdateTime(Date().time)

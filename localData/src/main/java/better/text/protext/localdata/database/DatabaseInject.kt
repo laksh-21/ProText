@@ -22,8 +22,8 @@ object DatabaseInject {
     ): AppDatabase = Room.databaseBuilder(
         context,
         AppDatabase::class.java,
-        "app-database"
-    ).build()
+        "protext-database"
+    ).createFromAsset("database/protext-database.db").build()
 
     @Singleton
     @Provides
