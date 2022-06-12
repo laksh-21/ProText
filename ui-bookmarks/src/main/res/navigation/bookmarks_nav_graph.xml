@@ -42,7 +42,7 @@
     </fragment>
     <dialog
         android:id="@+id/addBookmarkDialogFragment"
-        android:name="better.text.protext.ui.bookmarks.fragments.AddBookmarkDialogFragment"
+        android:name="better.text.protext.ui.bookmarks.dialogs.AddBookmarkDialogFragment"
         android:label="AddBookmarkDialogFragment" >
         <argument
             android:name="bookmark_id"

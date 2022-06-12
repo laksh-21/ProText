@@ -8,25 +8,24 @@ import better.text.protext.base.baseScreens.BaseViewModel
 import better.text.protext.base.baseScreens.UIEvent
 import better.text.protext.base.results.InvokeStatus
 import better.text.protext.interactors.bookmarks.DeleteBookmarkFoldersUseCase
-import better.text.protext.interactors.bookmarks.GetAllBookmarkFoldersUseCase
+import better.text.protext.interactors.bookmarks.GetBookmarkFoldersUseCase
 import better.text.protext.localdata.database.entities.BookmarkFolder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class BookmarkFolderViewModel @Inject constructor(
-    private val getAllBookmarkFoldersUseCase: GetAllBookmarkFoldersUseCase,
+    private val getBookmarkFoldersUseCase: GetBookmarkFoldersUseCase,
     private val deleteBookmarkFoldersUseCase: DeleteBookmarkFoldersUseCase
 ) : BaseViewModel() {
     val foldersFlow: Flow<PagingData<BookmarkFolder>> =
-        getAllBookmarkFoldersUseCase.flow.cachedIn(viewModelScope)
+        getBookmarkFoldersUseCase.flow.cachedIn(viewModelScope)
 
     fun getData() {
-        getAllBookmarkFoldersUseCase(
-            params = GetAllBookmarkFoldersUseCase.Params(
+        getBookmarkFoldersUseCase(
+            params = GetBookmarkFoldersUseCase.Params(
                 pagingConfig = PagingConfig(
                     pageSize = 50,
                     maxSize = 150,

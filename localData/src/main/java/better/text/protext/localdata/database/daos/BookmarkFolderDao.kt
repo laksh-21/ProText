@@ -9,6 +9,9 @@ abstract class BookmarkFolderDao {
     @Query("SELECT * FROM bookmark_folder ORDER BY last_updated DESC")
     abstract fun getAll(): PagingSource<Int, BookmarkFolder>
 
+    @Query("SELECT * FROM bookmark_folder ORDER BY folder_name DESC")
+    abstract fun getAllNoPaging(): List<BookmarkFolder>
+
     @Query("SELECT * FROM bookmark_folder WHERE id = :id")
     abstract fun get(id: Long): BookmarkFolder
 

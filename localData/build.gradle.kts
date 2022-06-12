@@ -47,6 +47,10 @@ dependencies {
     implementation("androidx.room:room-ktx:$roomVersion")
 }
 
+hilt {
+    enableAggregatingTask = true
+}
+
 kapt {
     correctErrorTypes = true
 }

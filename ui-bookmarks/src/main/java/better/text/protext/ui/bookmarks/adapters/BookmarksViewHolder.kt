@@ -97,6 +97,9 @@ class BookmarksViewHolder(
                     }
                 }
             }
+            binding.root.setOnClickListener {
+                onItemClick(item)
+            }
         }
     }
 

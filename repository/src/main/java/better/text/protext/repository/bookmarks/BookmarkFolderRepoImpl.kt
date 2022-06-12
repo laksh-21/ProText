@@ -8,12 +8,16 @@ import javax.inject.Inject
 class BookmarkFolderRepoImpl @Inject constructor(
     private val bookmarkFolderDao: BookmarkFolderDao
 ) : BookmarkFolderRepo {
-    override fun getBookmark(folderId: Long): BookmarkFolder {
+    override suspend fun getBookmark(folderId: Long): BookmarkFolder {
         return bookmarkFolderDao.get(id = folderId)
     }
 
-    override fun getAllFolders(): PagingSource<Int, BookmarkFolder> {
+    override fun getFolders(): PagingSource<Int, BookmarkFolder> {
         return bookmarkFolderDao.getAll()
+    }
+
+    override suspend fun getAllBookmarks(): List<BookmarkFolder> {
+        return bookmarkFolderDao.getAllNoPaging()
     }
 
     override suspend fun editFolder(bookmarkFolder: BookmarkFolder) {

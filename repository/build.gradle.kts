@@ -25,7 +25,7 @@ android {
 dependencies {
     implementation(project(mapOf("path" to ":localData")))
     implementation(project(mapOf("path" to ":remoteData")))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
     testImplementation("junit:junit:4.13.2")
 
     // hilt
@@ -37,6 +37,10 @@ dependencies {
     implementation("androidx.paging:paging-runtime:$pagingVersion")
 
     kapt("com.google.dagger:hilt-android-compiler:2.41")
+}
+
+hilt {
+    enableAggregatingTask = true
 }
 
 kapt {

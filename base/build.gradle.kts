@@ -26,7 +26,7 @@ android {
 }
 
 dependencies {
-    implementation("com.google.android.material:material:1.6.0")
+    implementation("com.google.android.material:material:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     // hilt
     implementation("com.google.dagger:hilt-android:2.41")
@@ -44,7 +44,16 @@ dependencies {
     val pagingVersion = "3.1.1"
     implementation("androidx.paging:paging-runtime:$pagingVersion")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
+
+    implementation("androidx.lifecycle:lifecycle-common:2.4.1")
+
+    // lifecycle service
+    implementation("androidx.lifecycle:lifecycle-service:2.4.1")
+}
+
+hilt {
+    enableAggregatingTask = true
 }
 
 kapt {

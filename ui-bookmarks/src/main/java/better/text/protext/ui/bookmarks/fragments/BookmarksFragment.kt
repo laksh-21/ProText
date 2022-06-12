@@ -1,5 +1,7 @@
 package better.text.protext.ui.bookmarks.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -19,6 +21,7 @@ import better.text.protext.base.baseAdapters.ItemListLookup
 import better.text.protext.base.baseScreens.BaseFragment
 import better.text.protext.base.baseScreens.UIEvent
 import better.text.protext.base.databinding.AccessibilityBackListScreenBinding
+import better.text.protext.localdata.database.entities.Bookmark
 import better.text.protext.localdata.database.entities.BookmarkFolder
 import better.text.protext.ui.bookmarks.adapters.BookmarksAdapter
 import better.text.protext.ui.bookmarks.utils.BookmarkIdKeyProvider
@@ -100,9 +103,9 @@ class BookmarksFragment :
 
     private fun initBookmarksListView() {
         binding.rvList.apply {
-            this@BookmarksFragment.adapter = BookmarksAdapter(
-                onItemClick = {}
-            )
+            this@BookmarksFragment.adapter = BookmarksAdapter {
+                handleBookmarkClick(it)
+            }
             adapter = this@BookmarksFragment.adapter
             tracker = SelectionTracker.Builder(
                 "bookmark_selection",
@@ -116,6 +119,16 @@ class BookmarksFragment :
             tracker.addObserver(selectionObserver)
             (adapter as BookmarksAdapter).selectionTracker = tracker
             layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
+    private fun handleBookmarkClick(bookmark: Bookmark) {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(bookmark.bookmarkUrl))
+        val resolvedApps = browserIntent.resolveActivity(requireActivity().packageManager)
+        if (resolvedApps != null) {
+            startActivity(browserIntent)
+        } else {
+            Toast.makeText(requireContext(), "No apps to open link", Toast.LENGTH_SHORT).show()
         }
     }
 

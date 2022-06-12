@@ -12,4 +12,7 @@
     <string name="helper_error_invalid_link">Invalid link</string>
     <string name="add_a_bookmark">Add a Bookmark</string>
     <string name="edit_a_bookmark">Edit a Bookmark</string>
+    <string name="url">URL</string>
+    <string name="enter_a_title_for_the_bookmark">Enter a title for the bookmark</string>
+    <string name="title">Title</string>
 </resources>

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/iamla/.gradle/caches/transforms-3/f2f5a9dc77ac83a70591a4c7c810cf7e/transformed/material-1.6.1/res/layout/m3_auto_complete_simple_item.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/app/src/main/res/layout/activity_main.xml" value="0.19882246376811594" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/base/src/main/res/drawable/ic_add.xml" value="0.15" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/base/src/main/res/drawable/ic_back.xml" value="0.15" />
@@ -13,14 +14,20 @@
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/base/src/main/res/layout/accessibility_back_list_screen.xml" value="0.264" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/base/src/main/res/layout/accessibility_list_screen.xml" value="0.2" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/base/src/main/res/layout/add_content_dialog.xml" value="0.29010416666666666" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/base/src/main/res/layout/add_content_service_layout.xml" value="0.21422101449275363" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/base/src/main/res/layout/selected_menu_items.xml" value="0.264" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/base/src/main/res/xml/accessibility_back_list_screen.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/drawable/bookmark_folder_background.xml" value="0.15" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/activity_bookmarks.xml" value="0.21422101449275363" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/add_bookmark_service_layout.xml" value="0.264" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/bookmark_folder_grid_item.xml" value="0.19882246376811594" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/bookmark_folder_service_spinner_item.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/bookmark_list_item.xml" value="0.36678200692041524" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/fragment_add_bookmark_folder.xml" value="0.264" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/fragment_bookmark_folder.xml" value="0.19882246376811594" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/fragment_bookmarks.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/spinner_item_layout.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/iamla/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.22509057971014493" />
       </map>
     </option>
   </component>

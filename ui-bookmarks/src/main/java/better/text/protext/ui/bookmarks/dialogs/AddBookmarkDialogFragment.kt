@@ -1,4 +1,4 @@
-package better.text.protext.ui.bookmarks.fragments
+package better.text.protext.ui.bookmarks.dialogs
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,6 +16,7 @@ import better.text.protext.base.utils.Validators
 import better.text.protext.base.utils.getFromClipboard
 import better.text.protext.localdata.database.entities.Bookmark
 import better.text.protext.ui.bookmarks.R
+import better.text.protext.ui.bookmarks.fragments.BookmarksFragment
 import better.text.protext.ui.bookmarks.viewmodels.AddBookmarkViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
