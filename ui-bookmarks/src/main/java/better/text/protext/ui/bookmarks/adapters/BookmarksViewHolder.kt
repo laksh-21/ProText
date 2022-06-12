@@ -1,6 +1,7 @@
 package better.text.protext.ui.bookmarks.adapters
 
 import android.net.Uri
+import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.recyclerview.selection.SelectionTracker
@@ -25,12 +26,6 @@ class BookmarksViewHolder(
         private var changedCheckedFromStart = false
         private var changedCheckedFromEnd = true
         override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {
-//            if (startId == R.id.start) {
-//                changedCheckedFromStart = false
-//                changedCheckedFromEnd = true
-//            } else {
-//
-//            }
         }
 
         override fun onTransitionChange(
@@ -42,15 +37,16 @@ class BookmarksViewHolder(
             if (progress >= 0.5f && !changedCheckedFromStart) {
                 changedCheckedFromStart = true
                 changedCheckedFromEnd = false
-                binding.ivWebsite.foreground = AppCompatResources
-                    .getDrawable(
-                        binding.root.context,
-                        better.text.protext.base.R.drawable.ic_check
-                    )
-            } else if (progress < 0.5f && !changedCheckedFromEnd) {
+                val checkDrawable = AppCompatResources.getDrawable(
+                    binding.root.context,
+                    better.text.protext.base.R.drawable.ic_check
+                )
+                binding.ivWebsite.setImageDrawable(checkDrawable)
+            }
+            if (progress < 0.5f && !changedCheckedFromEnd) {
                 changedCheckedFromEnd = true
                 changedCheckedFromStart = false
-                binding.ivWebsite.foreground = null
+                binding.ivWebsite.loadImageFromCoil()
             }
         }
 
@@ -84,21 +80,25 @@ class BookmarksViewHolder(
                     constraintLayout.transitionToStart()
                 }
             }
-            getWebsiteLogoUrl().let {
-                if (it.isNotEmpty()) {
-                    ivWebsite.load(it) {
-                        crossfade(true)
-                        placeholder(
-                            AppCompatResources.getDrawable(
-                                binding.root.context,
-                                better.text.protext.base.R.color.image_placeholder
-                            )
-                        )
-                    }
-                }
-            }
-            binding.root.setOnClickListener {
+            ivWebsite.loadImageFromCoil()
+            root.setOnClickListener {
                 onItemClick(item)
+            }
+        }
+    }
+
+    private fun ImageView.loadImageFromCoil() {
+        getWebsiteLogoUrl().let {
+            if (it.isNotEmpty()) {
+                load(it) {
+                    crossfade(true)
+                    placeholder(
+                        AppCompatResources.getDrawable(
+                            binding.root.context,
+                            better.text.protext.base.R.color.image_placeholder
+                        )
+                    )
+                }
             }
         }
     }

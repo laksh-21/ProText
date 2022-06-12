@@ -62,7 +62,7 @@
             android:id="@+id/iv_website"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            app:contentPadding="4dp"
+            android:padding="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Tooltip"
