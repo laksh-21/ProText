@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="MenuIconButtons" parent="Widget.Material3.Button.IconButton">
+    <style name="MenuIconButtons" parent="Widget.Material3.MaterialTimePicker.ImageButton">
         <item name="android:tint">?attr/colorOnBackground</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
@@ -29,6 +29,9 @@
     </style>
     <style name="FolderListItemCard" parent="Widget.Material3.CardView.Filled">
         <item name="cardCornerRadius">8dp</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:checkable">true</item>
         <item name="cardBackgroundColor">?attr/colorSurface</item>
     </style>
     <style name="ListItemTitleText" parent="TextAppearance.Material3.BodyLarge">
@@ -39,13 +42,18 @@
     </style>
     <style name="ListItemBodyText" parent="TextAppearance.Material3.BodyMedium">
         <item name="android:ellipsize">end</item>
-        <item name="android:maxLines">2</item>
+        <item name="android:maxLines">1</item>
         <item name="android:singleLine">true</item>
         <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
-    <style name="ListItemTimeText" parent="TextAppearance.Material3.BodyMedium">
+    <style name="ListItemBodyCopiedText" parent="TextAppearance.Material3.BodyMedium">
         <item name="android:ellipsize">end</item>
-        <item name="android:maxLines">2</item>
+        <item name="android:maxLines">4</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+    <style name="ListItemTimeText" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
         <item name="android:singleLine">true</item>
         <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:alpha">0.5</item>

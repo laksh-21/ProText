@@ -71,28 +71,14 @@ class AddBookmarkDialogFragment :
                             binding.inputSecond.text.toString()
                         )
                     }
-                    val requestKey = if (isEdit) BookmarksFragment.RESULT_REQUEST_EDIT_KEY else BookmarksFragment.RESULT_REQUEST_ADD_KEY
+                    val requestKey = if (isEdit)
+                        BookmarksFragment.RESULT_REQUEST_EDIT_KEY
+                    else
+                        BookmarksFragment.RESULT_REQUEST_ADD_KEY
                     setFragmentResult(
                         requestKey = requestKey,
                         result = result
                     )
-//                    if (isEdit) {
-//                    } else {
-//                        val result = bundleOf().apply {
-//                            putString(
-//                                BookmarksFragment.RESULT_TITLE_KEY,
-//                                binding.inputFirst.text.toString()
-//                            )
-//                            putString(
-//                                BookmarksFragment.RESULT_URL_KEY,
-//                                binding.inputSecond.text.toString()
-//                            )
-//                        }
-//                        setFragmentResult(
-//                            requestKey = BookmarksFragment.RESULT_REQUEST_ADD_KEY,
-//                            result = result
-//                        )
-//                    }
                     dismiss()
                 }
             }

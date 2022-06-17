@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/remoteData" />
             <option value="$PROJECT_DIR$/repository" />
             <option value="$PROJECT_DIR$/ui-bookmarks" />
+            <option value="$PROJECT_DIR$/ui-copiedTexts" />
           </set>
         </option>
       </GradleProjectSettings>

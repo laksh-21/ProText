@@ -24,11 +24,11 @@ android {
 
 dependencies {
     // hilt
-    implementation("com.google.dagger:hilt-android:2.41")
+    implementation("com.google.dagger:hilt-android:2.42")
     implementation(project(mapOf("path" to ":repository")))
     implementation(project(mapOf("path" to ":localData")))
     implementation(project(mapOf("path" to ":base")))
-    kapt("com.google.dagger:hilt-android-compiler:2.41")
+    kapt("com.google.dagger:hilt-android-compiler:2.42")
     // paging
     val pagingVersion = "3.1.1"
     implementation("androidx.paging:paging-runtime:$pagingVersion")

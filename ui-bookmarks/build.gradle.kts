@@ -27,12 +27,12 @@ android {
 
 dependencies {
     // hilt
-    implementation("com.google.dagger:hilt-android:2.41")
+    implementation("com.google.dagger:hilt-android:2.42")
     implementation(project(mapOf("path" to ":base")))
     implementation(project(mapOf("path" to ":interactors")))
     implementation(project(mapOf("path" to ":localData")))
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    kapt("com.google.dagger:hilt-android-compiler:2.41")
+    kapt("com.google.dagger:hilt-android-compiler:2.42")
 
     // navigation
     val navVersion = "2.4.2"

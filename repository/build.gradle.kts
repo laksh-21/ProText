@@ -29,14 +29,12 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
 
     // hilt
-    implementation("com.google.dagger:hilt-android:2.41")
-    kapt("com.google.dagger:hilt-android-compiler:2.41")
+    implementation("com.google.dagger:hilt-android:2.42")
+    kapt("com.google.dagger:hilt-android-compiler:2.42")
 
     // paging
     val pagingVersion = "3.1.1"
     implementation("androidx.paging:paging-runtime:$pagingVersion")
-
-    kapt("com.google.dagger:hilt-android-compiler:2.41")
 }
 
 hilt {

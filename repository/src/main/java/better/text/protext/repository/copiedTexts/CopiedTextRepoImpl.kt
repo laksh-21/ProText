@@ -16,11 +16,15 @@ class CopiedTextRepoImpl @Inject constructor(
         copiedTextDao.addCopiedText(copiedText)
     }
 
-    override suspend fun deleteCopiedText(copiedText: CopiedText) {
-        copiedTextDao.deleteCopiedText(copiedText)
+    override suspend fun deleteCopiedText(copiedTexts: List<Long>) {
+        copiedTextDao.deleteCopiedTexts(copiedTexts)
     }
 
     override suspend fun editCopiedText(copiedText: CopiedText) {
         copiedTextDao.updateCopiedText(copiedText)
+    }
+
+    override suspend fun getCopiedText(copiedTextId: Long): CopiedText {
+        return copiedTextDao.get(copiedTextId)
     }
 }

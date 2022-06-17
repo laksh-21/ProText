@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".dialogs.AddCopiedTextDialogFragment">
+
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        style="@style/ListTitleTextCollapsed"
+        app:layout_constraintEnd_toStartOf="@+id/left_margin_add"
+        app:layout_constraintStart_toStartOf="@+id/right_margin_add"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Add a Copied Text" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/right_margin_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/sideMargins" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/left_margin_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/sideMargins" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:helperTextEnabled="true"
+        app:layout_constraintEnd_toStartOf="@+id/left_margin_add"
+        app:layout_constraintStart_toStartOf="@+id/right_margin_add"
+        app:layout_constraintTop_toBottomOf="@+id/title_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_copied_text"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="bottom" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_action"
+        style="@style/Widget.Material3.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/left_margin_add"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

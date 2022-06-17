@@ -22,11 +22,14 @@
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/add_bookmark_service_layout.xml" value="0.264" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/bookmark_folder_grid_item.xml" value="0.19882246376811594" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/bookmark_folder_service_spinner_item.xml" value="0.22509057971014493" />
-        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/bookmark_list_item.xml" value="0.36678200692041524" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/bookmark_list_item.xml" value="0.22727272727272727" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/fragment_add_bookmark_folder.xml" value="0.264" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/fragment_bookmark_folder.xml" value="0.19882246376811594" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/fragment_bookmarks.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/spinner_item_layout.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-copiedTexts/src/main/res/layout/copied_text_list_item.xml" value="0.264" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-copiedTexts/src/main/res/layout/fragment_add_copied_text.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-copiedTexts/src/main/res/layout/fragment_add_copied_text_fragment.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/iamla/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.22509057971014493" />
       </map>
     </option>

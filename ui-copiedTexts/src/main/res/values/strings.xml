@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="copied_text_title">Copied Texts</string>
+    <string name="add_copied_text">Add a Copied Text</string>
+    <string name="edit_copied_text">Edit a Copied Text</string>
+</resources>

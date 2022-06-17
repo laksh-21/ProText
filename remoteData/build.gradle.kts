@@ -36,8 +36,8 @@ android {
 
 dependencies {
     // hilt
-    implementation("com.google.dagger:hilt-android:2.41")
-    kapt("com.google.dagger:hilt-android-compiler:2.41")
+    implementation("com.google.dagger:hilt-android:2.42")
+    kapt("com.google.dagger:hilt-android-compiler:2.42")
     // jsoup
     implementation("org.jsoup:jsoup:1.15.1")
     implementation("androidx.core:core-ktx:1.8.0")
