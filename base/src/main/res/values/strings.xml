@@ -9,4 +9,5 @@
     <string name="title">Title</string>
     <string name="link">Link</string>
     <string name="invalid_link">Invalid Link</string>
+    <string name="dismiss_text">Click anywhere on screen to dismiss</string>
 </resources>

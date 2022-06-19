@@ -3,4 +3,10 @@
     <string name="copied_text_title">Copied Texts</string>
     <string name="add_copied_text">Add a Copied Text</string>
     <string name="edit_copied_text">Edit a Copied Text</string>
+    <string name="copied_text_channel_id">COPIED_CHANNEL</string>
+    <string name="copied_text_channel_name">Copied Texts</string>
+    <string name="copied_text_channel_description">This channel concerns the notifications belonging to copied texts</string>
+    <string name="copied_text_notification_text">%1$d words \u2022 %2$d lines</string>
+    <string name="no_permission">No permission</string>
+    <string name="grant_permission">To be able to show an add copied text screen we need proper permissions</string>
 </resources>

@@ -1,8 +1,11 @@
 package better.text.protext.ui.bookmarks.services
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.WindowManager
 import android.widget.*
 import androidx.core.widget.doOnTextChanged
@@ -10,6 +13,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import better.text.protext.base.baseScreens.BaseForegroundWindowService
 import better.text.protext.base.baseScreens.UIEvent
+import better.text.protext.base.utils.NotificationData
 import better.text.protext.base.utils.Validators
 import better.text.protext.interactors.bookmarks.AddBookmarkUseCase
 import better.text.protext.interactors.bookmarks.GetAllFoldersUseCase
@@ -25,14 +29,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class BookmarkService : BaseForegroundWindowService<AddBookmarkServiceLayoutBinding>(
-    notificationChannelId = "bookmarks_channel_id",
-    notificationChannelName = "Bookmarks",
-    notificationTitle = "Add a bookmark",
-    notificationText = "",
-    notificationIcon = null,
     windowGravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL,
-    windowAnimations = android.R.style.Animation_InputMethod,
-    action = {}
+    windowAnimations = android.R.style.Animation_InputMethod
 ) {
     @Inject
     lateinit var getAllFoldersUseCase: GetAllFoldersUseCase
@@ -57,16 +55,40 @@ class BookmarkService : BaseForegroundWindowService<AddBookmarkServiceLayoutBind
 
     override fun onCreate(binding: AddBookmarkServiceLayoutBinding) {
         windowManager.addView(binding.root, layoutParams)
-        startForeground(1, createNotification())
-        initVariables()
+        val notificationData = NotificationData(
+            title = getString(R.string.add_a_bookmark),
+            content = getString(better.text.protext.base.R.string.dismiss_text),
+            iconId = R.drawable.ic_bookmark,
+            notificationId = 4321,
+            channelId = getString(R.string.bookmark_channel_id),
+            channelName = getString(R.string.bookmark_channel_name),
+            channelDescription = getString(R.string.bookmark_channel_description)
+        )
+        startForeground(1, createNotification(notificationData))
         initViews()
         initViewListeners()
         initObservables()
+    }
+
+    override fun onStartCommand(intent: Intent?) {
+        initVariables()
         initData()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun initViewListeners() {
         binding.apply {
+            root.setOnTouchListener { _, motionEvent ->
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_OUTSIDE -> {
+                        close()
+                        true
+                    }
+                    else -> {
+                        false
+                    }
+                }
+            }
             inputBookmarkUrl.doOnTextChanged { _, _, _, _ ->
                 button.isEnabled = shouldEnableButton()
                 validateUrl()

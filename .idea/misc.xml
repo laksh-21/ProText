@@ -10,6 +10,7 @@
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/base/src/main/res/drawable/ic_check.xml" value="0.15" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/base/src/main/res/drawable/ic_delete.xml" value="0.15" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/base/src/main/res/drawable/ic_edit.xml" value="0.15" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/base/src/main/res/drawable/service_window_background.xml" value="0.1605" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/base/src/main/res/font/montserrat.xml" value="0.14010416666666667" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/base/src/main/res/layout/accessibility_back_list_screen.xml" value="0.264" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/base/src/main/res/layout/accessibility_list_screen.xml" value="0.2" />
@@ -27,7 +28,9 @@
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/fragment_bookmark_folder.xml" value="0.19882246376811594" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/fragment_bookmarks.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-bookmarks/src/main/res/layout/spinner_item_layout.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-copiedTexts/src/main/res/layout/activity_copied_text.xml" value="0.25" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-copiedTexts/src/main/res/layout/copied_text_list_item.xml" value="0.264" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-copiedTexts/src/main/res/layout/copied_text_service_layout.xml" value="0.2" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-copiedTexts/src/main/res/layout/fragment_add_copied_text.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-copiedTexts/src/main/res/layout/fragment_add_copied_text_fragment.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/iamla/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.22509057971014493" />

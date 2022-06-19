@@ -3,6 +3,7 @@ package better.text.protext.ui_copiedtexts.fragments
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -15,6 +16,7 @@ import androidx.recyclerview.selection.StorageStrategy
 import androidx.recyclerview.widget.LinearLayoutManager
 import better.text.protext.base.baseAdapters.ItemListLookup
 import better.text.protext.base.baseScreens.BaseFragment
+import better.text.protext.base.baseScreens.UIEvent
 import better.text.protext.base.databinding.AccessibilityListScreenBinding
 import better.text.protext.ui_copiedtexts.R
 import better.text.protext.ui_copiedtexts.adapters.CopiedTextAdapter
@@ -107,6 +109,14 @@ class CopiedTextFragment :
         lifecycleScope.launch {
             viewModel.copiedTextFlow.flowWithLifecycle(lifecycle).collectLatest {
                 adapter.submitData(it)
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.eventsFlow.flowWithLifecycle(lifecycle).collectLatest {
+                when (it) {
+                    is UIEvent.ShowToast -> Toast.makeText(requireContext(), it.message, it.duration).show()
+                    else -> {}
+                }
             }
         }
         setFragmentResultListener(KEY_EDIT_TEXT) { _, bundle ->

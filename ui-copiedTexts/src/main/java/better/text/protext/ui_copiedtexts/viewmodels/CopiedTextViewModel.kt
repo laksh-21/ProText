@@ -5,6 +5,8 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import better.text.protext.base.baseScreens.BaseViewModel
+import better.text.protext.base.baseScreens.UIEvent
+import better.text.protext.base.results.InvokeStatus
 import better.text.protext.interactors.copiedTexts.AddCopiedTextUseCase
 import better.text.protext.interactors.copiedTexts.DeleteCopiedTextUseCase
 import better.text.protext.interactors.copiedTexts.GetAllCopiedTextsUseCase
@@ -49,6 +51,7 @@ class CopiedTextViewModel @Inject constructor(
                 )
             ).collect {
                 when (it) {
+                    is InvokeStatus.Failure -> sendEvent(UIEvent.ShowToast("Something went wrong!"))
                     else -> {}
                 }
             }
@@ -70,6 +73,7 @@ class CopiedTextViewModel @Inject constructor(
                 )
             ).collect {
                 when (it) {
+                    is InvokeStatus.Failure -> sendEvent(UIEvent.ShowToast("Something went wrong!"))
                     else -> {}
                 }
             }
@@ -84,6 +88,7 @@ class CopiedTextViewModel @Inject constructor(
                 )
             ).collect {
                 when (it) {
+                    is InvokeStatus.Failure -> sendEvent(UIEvent.ShowToast("Something went wrong!"))
                     else -> {}
                 }
             }

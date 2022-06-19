@@ -17,4 +17,7 @@
     <string name="title">Title</string>
     <string name="no_permission">No permission</string>
     <string name="grant_permission">To be able to show an add bookmark screen we need proper permissions</string>
+    <string name="bookmark_channel_id">BOOKMARK_CHANNEL</string>
+    <string name="bookmark_channel_name">Bookmarks</string>
+    <string name="bookmark_channel_description">This channel concerns with notifications related to bookmarks</string>
 </resources>

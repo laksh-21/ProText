@@ -48,6 +48,7 @@ dependencies {
     implementation(project(mapOf("path" to ":base")))
     // hilt
     implementation("com.google.dagger:hilt-android:2.42")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     kapt("com.google.dagger:hilt-android-compiler:2.42")
 
     // navigation
@@ -64,6 +65,9 @@ dependencies {
 
     // rv selection
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
+
+    // lifecycle service
+    implementation("androidx.lifecycle:lifecycle-service:2.4.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
