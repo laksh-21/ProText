@@ -1,0 +1,8 @@
+<resources>
+    <string name="settings">Settings</string>
+    <string name="tutorial">How to</string>
+    <string name="copy_texts">Copy Texts</string>
+    <string name="add_bookmarks">Add Bookmarks</string>
+    <string name="bookmark_prefs">Bookmark Preferences</string>
+    <string name="default_folder">Default Folder</string>
+</resources>

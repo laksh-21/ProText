@@ -3,39 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/Widget.MaterialComponents.BottomSheet.Modal"
+    android:background="?attr/colorBackgroundFloating"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     tools:context=".fragments.AddBookmarkFolderFragment">
 
 
-    <ImageButton
-        android:id="@+id/btn_back"
-        style="@style/MenuIconButtons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_back"
-        android:contentDescription="@string/back"
-        app:layout_constraintStart_toStartOf="@+id/left_margin"
-        app:layout_constraintTop_toTopOf="@+id/top_margin" />
-
     <TextView
         android:id="@+id/tv_title_collapsed"
+        style="@style/ListTitleTextCollapsed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:text="@string/add_a_folder"
-        style="@style/ListTitleTextCollapsed"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_back"
-        app:layout_constraintEnd_toStartOf="@+id/right_margin"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btn_back"
-        app:layout_constraintTop_toTopOf="@+id/btn_back" />
+        app:layout_constraintStart_toStartOf="@+id/left_margin"
+        app:layout_constraintTop_toTopOf="@+id/top_margin" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="btn_back,tv_title_collapsed" />
+        app:constraint_referenced_ids="tv_title_collapsed"
+        tools:layout_editor_absoluteY="48dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_layout_first"
@@ -117,12 +107,14 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_add_bookmark"
+        style="@style/Widget.Material3.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/add"
         app:layout_constraintBottom_toTopOf="@+id/bottom_margin"
         app:layout_constraintEnd_toStartOf="@+id/right_margin"
         app:layout_constraintTop_toBottomOf="@+id/color_selector"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,16 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    style="@style/Widget.MaterialComponents.BottomSheet.Modal"
+    android:background="?attr/colorBackgroundFloating"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     tools:context=".dialogs.AddCopiedTextDialogFragment">
 
 
     <TextView
         android:id="@+id/title_text"
+        style="@style/ListTitleTextCollapsed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        style="@style/ListTitleTextCollapsed"
         app:layout_constraintEnd_toStartOf="@+id/left_margin_add"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/right_margin_add"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Add a Copied Text" />
@@ -37,17 +41,18 @@
         style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:helperTextEnabled="true"
         app:layout_constraintEnd_toStartOf="@+id/left_margin_add"
         app:layout_constraintStart_toStartOf="@+id/right_margin_add"
-        app:layout_constraintTop_toBottomOf="@+id/title_text">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_copied_text"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:gravity="bottom" />
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:maxHeight="200dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -62,4 +67,14 @@
         app:layout_constraintEnd_toStartOf="@+id/left_margin_add"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/PageContentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/content"
+        app:layout_constraintStart_toStartOf="@+id/right_margin_add"
+        app:layout_constraintTop_toBottomOf="@+id/title_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,11 @@
         tools:layout="@layout/accessibility_list_screen" >
         <action
             android:id="@+id/action_bookmarkFolderFragment_to_bookmarksFragment"
-            app:destination="@id/bookmarksFragment" />
+            app:destination="@id/bookmarksFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_bookmarkFolderFragment_to_addBookmarkFolderFragment"
             app:destination="@id/addBookmarkFolderFragment" />
@@ -30,7 +34,7 @@
             android:id="@+id/action_bookmarksFragment_to_addBookmarkDialogFragment"
             app:destination="@id/addBookmarkDialogFragment" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/addBookmarkFolderFragment"
         android:name="better.text.protext.ui.bookmarks.fragments.AddBookmarkFolderFragment"
         android:label="fragment_add_bookmark_folder"
@@ -39,7 +43,7 @@
             android:name="folderId"
             app:argType="long"
             android:defaultValue="-1L" />
-    </fragment>
+    </dialog>
     <dialog
         android:id="@+id/addBookmarkDialogFragment"
         android:name="better.text.protext.ui.bookmarks.dialogs.AddBookmarkDialogFragment"

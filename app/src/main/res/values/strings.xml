@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ProText</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="copied_texts">Copied Texts</string>
 </resources>

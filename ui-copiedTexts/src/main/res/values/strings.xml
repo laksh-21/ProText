@@ -9,4 +9,5 @@
     <string name="copied_text_notification_text">%1$d words \u2022 %2$d lines</string>
     <string name="no_permission">No permission</string>
     <string name="grant_permission">To be able to show an add copied text screen we need proper permissions</string>
+    <string name="content">Content</string>
 </resources>

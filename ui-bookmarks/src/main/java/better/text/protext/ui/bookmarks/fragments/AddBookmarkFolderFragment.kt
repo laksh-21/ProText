@@ -14,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import better.text.protext.base.baseScreens.BaseFragment
+import better.text.protext.base.baseScreens.BaseBottomSheetDialog
 import better.text.protext.base.baseScreens.UIEvent
 import better.text.protext.base.utils.LinearSpacingItemDecoration
 import better.text.protext.localdata.database.entities.BookmarkFolder
@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AddBookmarkFolderFragment :
-    BaseFragment<FragmentAddBookmarkFolderBinding>() {
+    BaseBottomSheetDialog<FragmentAddBookmarkFolderBinding>() {
 
     private val viewModel: AddBookmarkFolderViewModel by viewModels()
     private lateinit var pageChangeCallback: ViewPager2.OnPageChangeCallback
@@ -37,7 +37,13 @@ class AddBookmarkFolderFragment :
     private val navArgs: AddBookmarkFolderFragmentArgs by navArgs()
     private lateinit var previewColorList: List<BookmarkFolder>
 
-    override fun onCreateView(binding: FragmentAddBookmarkFolderBinding, savedInstanceState: Bundle?) {
+//    override fun onCreateView(binding: FragmentAddBookmarkFolderBinding, savedInstanceState: Bundle?) {
+//    }
+
+    override fun onViewCreated(
+        binding: FragmentAddBookmarkFolderBinding,
+        savedInstanceState: Bundle?
+    ) {
         initVariables()
         initViews()
         initViewPager()
@@ -125,9 +131,6 @@ class AddBookmarkFolderFragment :
                 viewModel.handleAddClick(
                     (colorSelector.adapter as ColorSelectorAdapter).getItem(currentItem)
                 )
-            }
-            btnBack.setOnClickListener {
-                navController.navigateUp()
             }
         }
     }
