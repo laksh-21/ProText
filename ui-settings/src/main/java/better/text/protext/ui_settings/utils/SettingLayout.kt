@@ -1,8 +1,9 @@
 package better.text.protext.ui_settings.utils
 
 import better.text.protext.ui_settings.R
+import better.text.protext.ui_settings.viewmodels.SettingsState
 
-internal fun generateSettingsLayout(): List<SettingItem> {
+internal fun generateSettingsLayout(settingsState: SettingsState): List<SettingItem> {
     return listOf(
         SettingsSection(
             title = SettingItem.Heading(
@@ -28,7 +29,10 @@ internal fun generateSettingsLayout(): List<SettingItem> {
             components = listOf(
                 SettingItem.Setting(
                     title = R.string.default_folder,
-                    subtitle = "Deff"
+                    subtitle = settingsState.bookmarkFolders.first {
+                        it.id == settingsState.userSetting.defaultFolder
+                    }.folderName,
+                    settingType = SettingType.BookmarkDefaultFolder
                 )
             )
         )

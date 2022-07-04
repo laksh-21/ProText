@@ -1,6 +1,7 @@
 package better.text.protext.di
 
 import better.text.protext.localdata.database.DatabaseInject
+import better.text.protext.preferecnes.PreferencesInject
 import better.text.protext.remotedata.bookmarks.RemoteDataInject
 import better.text.protext.repository.RepositoryModule
 import dagger.Module
@@ -12,6 +13,7 @@ import dagger.hilt.components.SingletonComponent
         DatabaseInject::class,
         RepositoryModule::class,
         RemoteDataInject::class,
+        PreferencesInject::class
     ]
 )
 @InstallIn(SingletonComponent::class)

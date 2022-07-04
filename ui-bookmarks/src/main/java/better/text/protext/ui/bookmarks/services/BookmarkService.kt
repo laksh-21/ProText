@@ -18,11 +18,13 @@ import better.text.protext.base.utils.Validators
 import better.text.protext.interactors.bookmarks.AddBookmarkUseCase
 import better.text.protext.interactors.bookmarks.GetAllFoldersUseCase
 import better.text.protext.interactors.bookmarks.GetWebsiteTitleByUrlUseCase
-import better.text.protext.localdata.database.entities.BookmarkFolder
+import better.text.protext.preferecnes.DatastoreManager
 import better.text.protext.ui.bookmarks.R
 import better.text.protext.ui.bookmarks.databinding.AddBookmarkServiceLayoutBinding
+import better.text.protext.ui.bookmarks.viewmodels.BookmarkFoldersState
 import better.text.protext.ui.bookmarks.viewmodels.BookmarkServiceViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -38,12 +40,19 @@ class BookmarkService : BaseForegroundWindowService<AddBookmarkServiceLayoutBind
     lateinit var getWebsiteTitleByUrlUseCase: GetWebsiteTitleByUrlUseCase
     @Inject
     lateinit var addBookmarkUseCase: AddBookmarkUseCase
+    @Inject
+    lateinit var datastoreManager: DatastoreManager
 
     override val windowManager: WindowManager
         get() = getSystemService(WINDOW_SERVICE) as WindowManager
 
     private val viewModel: BookmarkServiceViewModel by lazy {
-        BookmarkServiceViewModel()
+        BookmarkServiceViewModel(
+            getAllFoldersUseCase,
+            getWebsiteTitleByUrlUseCase,
+            addBookmarkUseCase,
+            datastoreManager
+        )
     }
 
     private var websiteUrl: String = ""
@@ -65,14 +74,14 @@ class BookmarkService : BaseForegroundWindowService<AddBookmarkServiceLayoutBind
             channelDescription = getString(R.string.bookmark_channel_description)
         )
         startForeground(1, createNotification(notificationData))
-        initViews()
-        initViewListeners()
         initObservables()
     }
 
     override fun onStartCommand(intent: Intent?) {
         initVariables()
         initData()
+        initViews()
+        initViewListeners()
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -101,12 +110,10 @@ class BookmarkService : BaseForegroundWindowService<AddBookmarkServiceLayoutBind
                 button.isEnabled = shouldEnableButton()
             }
             folderNameSpinner.setOnItemClickListener { _, _, position, _ ->
-                Log.d("Protext", "Selected position: $position")
                 selectionPosition = position
             }
             button.setOnClickListener {
                 viewModel.addBookmark(
-                    useCase = addBookmarkUseCase,
                     position = selectionPosition,
                     title = binding.inputBookmarkTitle.text.toString(),
                     url = binding.inputBookmarkUrl.text.toString()
@@ -150,9 +157,10 @@ class BookmarkService : BaseForegroundWindowService<AddBookmarkServiceLayoutBind
 
     private fun initObservables() {
         lifecycleScope.launch {
-            viewModel.folders.flowWithLifecycle(lifecycle).collectLatest {
-                Log.d("Protext", it.toString())
-                initSpinner(it)
+            viewModel.bookmarkFoldersState.flowWithLifecycle(lifecycle).collectLatest {
+                it?.let {
+                    initSpinner(it)
+                }
             }
         }
         lifecycleScope.launch {
@@ -169,6 +177,9 @@ class BookmarkService : BaseForegroundWindowService<AddBookmarkServiceLayoutBind
                 }
             }
         }
+        lifecycleScope.launch {
+            datastoreManager.userSettingsFlow.collect()
+        }
     }
 
     private fun setWebsiteTitle(websiteTitle: String) {
@@ -176,22 +187,25 @@ class BookmarkService : BaseForegroundWindowService<AddBookmarkServiceLayoutBind
     }
 
     private fun initData() {
-        viewModel.getBookmarkFolders(getAllFoldersUseCase)
+        viewModel.getBookmarkFolders()
         if (websiteUrl.isNotEmpty()) {
-            viewModel.getWebsiteTitle(getWebsiteTitleByUrlUseCase, websiteUrl)
+            viewModel.getWebsiteTitle(websiteUrl)
         }
     }
 
-    private fun initSpinner(items: List<BookmarkFolder>) {
-        if (items.isEmpty()) return
+    private fun initSpinner(bookmarkFoldersState: BookmarkFoldersState) {
         binding.folderNameSpinner.apply {
             setAdapter(
                 ArrayAdapter(
                     this@BookmarkService,
                     R.layout.spinner_item_layout,
-                    items.map { it.folderName }
+                    bookmarkFoldersState.folders.map { it.folderName }
                 )
             )
+            val selection = bookmarkFoldersState.folders.first {
+                it.id == bookmarkFoldersState.settings.defaultFolder
+            }.folderName
+            setText(selection, false)
         }
     }
 

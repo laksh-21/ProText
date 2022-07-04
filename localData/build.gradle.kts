@@ -22,8 +22,6 @@ android {
 }
 
 dependencies {
-    // data store
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
     // room
     val roomVersion = "2.4.2"
     implementation("androidx.room:room-runtime:$roomVersion")

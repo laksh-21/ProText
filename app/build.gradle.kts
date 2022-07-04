@@ -50,6 +50,7 @@ dependencies {
     implementation(project(mapOf("path" to ":remoteData")))
     implementation(project(mapOf("path" to ":ui-copiedTexts")))
     implementation(project(mapOf("path" to ":ui-settings")))
+    implementation(project(mapOf("path" to ":preferecnes")))
 //    implementation(project(mapOf("path" to ":base")))
     kapt("com.google.dagger:hilt-android-compiler:2.42")
 

@@ -32,6 +32,7 @@ dependencies {
     implementation(project(mapOf("path" to ":interactors")))
     implementation(project(mapOf("path" to ":localData")))
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation(project(mapOf("path" to ":preferecnes")))
     kapt("com.google.dagger:hilt-android-compiler:2.42")
 
     // navigation

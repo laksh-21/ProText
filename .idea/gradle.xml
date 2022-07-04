@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/base" />
             <option value="$PROJECT_DIR$/interactors" />
             <option value="$PROJECT_DIR$/localData" />
+            <option value="$PROJECT_DIR$/preferecnes" />
             <option value="$PROJECT_DIR$/remoteData" />
             <option value="$PROJECT_DIR$/repository" />
             <option value="$PROJECT_DIR$/ui-bookmarks" />

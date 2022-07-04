@@ -23,7 +23,8 @@ sealed class SettingItem(val id: Int) {
     }
     data class Setting(
         @StringRes val title: Int,
-        val subtitle: String
+        val subtitle: String,
+        val settingType: SettingType
     ) : SettingItem(2) {
         companion object {
             const val ID = 2
