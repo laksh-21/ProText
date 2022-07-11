@@ -1,11 +1,21 @@
 package better.text.protext
 
 import android.os.Bundle
+import android.view.View
+import androidx.activity.viewModels
+import androidx.core.os.bundleOf
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import better.text.protext.base.baseScreens.BaseActivity
 import better.text.protext.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -14,32 +24,44 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     private lateinit var navController: NavController
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?, binding: ActivityMainBinding) {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.findNavController()
         setupBottomNav()
+        checkSplashScreen()
     }
 
-    override fun onResume() {
-        super.onResume()
-        navController = binding.navHostFragment.findNavController()
+    private fun checkSplashScreen() {
+        lifecycleScope.launch {
+            viewModel.isOnBoardingDoneFlow.flowWithLifecycle(lifecycle).collectLatest {
+                if (!it) {
+                    startOnBoarding()
+                }
+            }
+        }
+    }
+
+    private fun startOnBoarding() {
+        val options = NavOptions.Builder()
+            .setPopUpTo(better.text.protext.ui.bookmarks.R.id.ui_bookmarks_nav_graph, true)
+            .build()
+        navController.navigate(
+            better.text.protext.ui_onboarding.R.id.onboarding_nav_graph,
+            bundleOf(),
+            options
+        )
     }
 
     private fun setupBottomNav() {
-        binding.bottomNavigationView.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.bookmarks_nav_item -> {
-                    navController.navigate(better.text.protext.ui.bookmarks.R.id.ui_bookmarks_nav_graph)
-                    true
-                }
-                R.id.copied_texts_nav_item -> {
-                    navController.navigate(better.text.protext.ui_copiedtexts.R.id.copied_text_nav_graph)
-                    true
-                }
-                R.id.settings_nav_item -> {
-                    navController.navigate(better.text.protext.ui_settings.R.id.settings_nav_graph)
-                    true
-                }
-                else -> false
+        binding.bottomNavigationView.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            val showNavBar = destination.parent?.id != better.text.protext.ui_onboarding.R.id.onboarding_nav_graph
+            binding.bottomNavigationView.visibility = if (showNavBar) {
+                View.VISIBLE
+            } else {
+                View.GONE
             }
         }
     }

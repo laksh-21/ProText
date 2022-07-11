@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="OnBoardingTitle" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textAlignment">center</item>
+    </style>
+    <style name="OnBoardingSubtitle" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textAlignment">center</item>
+    </style>
+</resources>

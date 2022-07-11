@@ -4,8 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/iamla/.gradle/caches/transforms-3/f2f5a9dc77ac83a70591a4c7c810cf7e/transformed/material-1.6.1/res/layout/m3_auto_complete_simple_item.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.121" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/app/src/main/res/drawable/app_icon_background.xml" value="0.121" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/app/src/main/res/drawable/ic_launcher_background.xml" value="0.121" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/app/src/main/res/layout/activity_main.xml" value="0.19882246376811594" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/app/src/main/res/menu/bottom_nav_manu.xml" value="0.6" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/app/src/main/res/mipmap-anydpi-v26/app_icon.xml" value="0.121" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/app/src/main/res/mipmap-anydpi-v26/app_icon_round.xml" value="0.121" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1605" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1275" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/base/src/main/res/drawable/ic_add.xml" value="0.15" />
@@ -36,6 +41,8 @@
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-copiedTexts/src/main/res/layout/copied_text_service_layout.xml" value="0.2" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-copiedTexts/src/main/res/layout/fragment_add_copied_text.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-copiedTexts/src/main/res/layout/fragment_add_copied_text_fragment.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-onboarding/src/main/res/layout/fragment_on_boarding.xml" value="0.264" />
+        <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-onboarding/src/main/res/layout/on_boarding_item.xml" value="0.264" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-settings/src/main/res/drawable/ic_settings.xml" value="0.121" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-settings/src/main/res/layout/fragment_settings.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/iamla/AndroidStudioProjects/ProText/ui-settings/src/main/res/layout/heading_list_item.xml" value="0.2" />

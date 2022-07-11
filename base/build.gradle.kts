@@ -44,12 +44,13 @@ dependencies {
     val pagingVersion = "3.1.1"
     implementation("androidx.paging:paging-runtime:$pagingVersion")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3")
 
-    implementation("androidx.lifecycle:lifecycle-common:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-common:2.5.0")
 
     // lifecycle service
-    implementation("androidx.lifecycle:lifecycle-service:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-service:2.5.0")
+    implementation("androidx.core:core-splashscreen:1.0.0-rc01")
 }
 
 hilt {

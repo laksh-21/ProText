@@ -25,7 +25,7 @@ android {
 dependencies {
     implementation(project(mapOf("path" to ":localData")))
     implementation(project(mapOf("path" to ":remoteData")))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3")
     testImplementation("junit:junit:4.13.2")
 
     // hilt

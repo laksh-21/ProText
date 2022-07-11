@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/repository" />
             <option value="$PROJECT_DIR$/ui-bookmarks" />
             <option value="$PROJECT_DIR$/ui-copiedTexts" />
+            <option value="$PROJECT_DIR$/ui-onboarding" />
             <option value="$PROJECT_DIR$/ui-settings" />
           </set>
         </option>

@@ -58,4 +58,7 @@
         <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:alpha">0.5</item>
     </style>
+    <style name="TextButton" parent="Widget.Material3.Button.TextButton">
+
+    </style>
 </resources>

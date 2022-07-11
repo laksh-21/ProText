@@ -54,7 +54,7 @@ dependencies {
     implementation("io.coil-kt:coil:2.1.0")
 
     // lifecycle service
-    implementation("androidx.lifecycle:lifecycle-service:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-service:2.5.0")
 
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.4.2")

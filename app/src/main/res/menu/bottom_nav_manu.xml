@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/bookmarks_nav_item"
+        android:id="@id/ui_bookmarks_nav_graph"
         android:enabled="true"
         android:icon="@drawable/ic_bookmark"
         android:title="@string/bookmarks"/>
     <item
-        android:id="@+id/copied_texts_nav_item"
+        android:id="@id/copied_text_nav_graph"
         android:enabled="true"
         android:icon="@drawable/ic_copy"
         android:title="@string/copied_texts"/>
     <item
-        android:id="@+id/settings_nav_item"
+        android:id="@id/settings_nav_graph"
         android:enabled="true"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings"/>

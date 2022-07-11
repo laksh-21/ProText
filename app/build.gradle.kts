@@ -51,6 +51,7 @@ dependencies {
     implementation(project(mapOf("path" to ":ui-copiedTexts")))
     implementation(project(mapOf("path" to ":ui-settings")))
     implementation(project(mapOf("path" to ":preferecnes")))
+    implementation(project(mapOf("path" to ":ui-onboarding")))
 //    implementation(project(mapOf("path" to ":base")))
     kapt("com.google.dagger:hilt-android-compiler:2.42")
 
@@ -59,7 +60,9 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
+    implementation("androidx.core:core-splashscreen:1.0.0-rc01")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3")
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.4.2")
     implementation("com.google.android.material:material:1.6.1")

@@ -1,0 +1,8 @@
+<resources>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="copy_title">Copy Large Texts</string>
+    <string name="bookmarks_title">Manage Bookmarks</string>
+    <string name="copy_subtitle">Copying large texts is made easier than ever! Now there is no need to keep copying and going back and forth into an editor</string>
+    <string name="bookmarks_subtitle">Manage your bookmarks easily into folders and avoid searching them for minutes!</string>
+</resources>
