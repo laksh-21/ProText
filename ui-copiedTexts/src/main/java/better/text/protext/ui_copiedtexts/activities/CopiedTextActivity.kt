@@ -1,4 +1,4 @@
-package better.text.protext.ui_copiedtexts.activities
+package better.text.protext.ui_copiedtexts.activities // ktlint-disable package-name
 
 import android.content.Intent
 import android.net.Uri
@@ -6,21 +6,20 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import better.text.protext.base.baseScreens.BaseActivity
 import better.text.protext.base.utils.PermissionHelper
 import better.text.protext.ui_copiedtexts.R
+import better.text.protext.ui_copiedtexts.databinding.ActivityCopiedTextBinding
 import better.text.protext.ui_copiedtexts.services.CopiedTextService
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class CopiedTextActivity : AppCompatActivity() {
+class CopiedTextActivity : BaseActivity<ActivityCopiedTextBinding>() {
 
     private lateinit var permissionHelper: PermissionHelper
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?, binding: ActivityCopiedTextBinding) {
         setupPermissionHelper()
         checkForOverlayPermission()
-        setContentView(R.layout.activity_copied_text)
     }
 
     private fun setupPermissionHelper() {
@@ -78,5 +77,9 @@ class CopiedTextActivity : AppCompatActivity() {
             startService(serviceIntent)
         }
         finish()
+    }
+
+    override fun getViewBinding(): ActivityCopiedTextBinding {
+        return ActivityCopiedTextBinding.inflate(layoutInflater)
     }
 }

@@ -11,19 +11,19 @@ import androidx.core.app.NotificationCompat
 
 object NotificationHelper {
     fun createOrUpdateNotification(context: Context, data: NotificationData): Notification {
-
         createNotificationChannel(
             context = context,
             channelId = data.channelId,
             channelName = data.channelName,
-            channelDescription = data.channelDescription
+            channelDescription = data.channelDescription,
+            importance = data.importance
         )
 
         val builder = NotificationCompat.Builder(context, data.channelId)
             .setSmallIcon(data.iconId)
             .setContentTitle(data.title)
             .setContentText(data.content)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(data.priority)
 
         for (action in data.actions) {
             builder.addAction(
@@ -46,12 +46,12 @@ object NotificationHelper {
         context: Context,
         channelId: String,
         channelName: String,
-        channelDescription: String
+        channelDescription: String,
+        importance: Int
     ) {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(channelId, channelName, importance).apply {
                 description = channelDescription
             }
@@ -72,7 +72,9 @@ data class NotificationData(
     val channelName: String,
     val channelDescription: String,
     val actions: List<NotificationAction> = listOf(),
-    val clickAction: PendingIntent? = null
+    val clickAction: PendingIntent? = null,
+    val importance: Int = NotificationManager.IMPORTANCE_DEFAULT,
+    val priority: Int = NotificationCompat.PRIORITY_DEFAULT
 )
 
 data class NotificationAction(

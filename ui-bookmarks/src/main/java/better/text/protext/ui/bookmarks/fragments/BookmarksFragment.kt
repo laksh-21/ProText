@@ -17,10 +17,14 @@ import androidx.recyclerview.selection.SelectionPredicates
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
 import androidx.recyclerview.widget.LinearLayoutManager
+import better.text.protext.base.R
 import better.text.protext.base.baseAdapters.ItemListLookup
 import better.text.protext.base.baseScreens.BaseFragment
 import better.text.protext.base.baseScreens.UIEvent
 import better.text.protext.base.databinding.AccessibilityBackListScreenBinding
+import better.text.protext.base.globalUI.utils.GlobalMenuItem
+import better.text.protext.base.utils.copyToClipboard
+import better.text.protext.base.utils.shareText
 import better.text.protext.localdata.database.entities.Bookmark
 import better.text.protext.localdata.database.entities.BookmarkFolder
 import better.text.protext.ui.bookmarks.adapters.BookmarksAdapter
@@ -56,6 +60,29 @@ class BookmarksFragment :
             }
         }
 
+    private val menuItems = mutableListOf(
+        GlobalMenuItem(
+            itemName = R.string.edit,
+            itemIcon = R.drawable.ic_edit,
+            clickAction = { editBookmark() }
+        ),
+        GlobalMenuItem(
+            itemName = R.string.delete,
+            itemIcon = R.drawable.ic_delete,
+            clickAction = { deleteBookmarks() }
+        ),
+        GlobalMenuItem(
+            itemName = R.string.copy,
+            itemIcon = R.drawable.ic_copy,
+            clickAction = { copyBookmarks() }
+        ),
+        GlobalMenuItem(
+            itemName = R.string.share,
+            itemIcon = R.drawable.ic_share,
+            clickAction = { shareBookmarks() }
+        )
+    )
+
     override fun onCreateView(binding: AccessibilityBackListScreenBinding, savedInstanceState: Bundle?) {
         initVariables()
         initBookmarksListView()
@@ -76,25 +103,55 @@ class BookmarksFragment :
                         BookmarksFragmentDirections.actionBookmarksFragmentToAddBookmarkDialogFragment()
                     )
                 }
-                delete.setOnClickListener {
-                    val folders = tracker.selection.map { it }
-                    viewModel.deleteBookmarks(folders)
-                }
                 close.setOnClickListener {
                     tracker.clearSelection()
                 }
-                edit.setOnClickListener {
-                    val id = tracker.selection.map { it }.first()
-                    editableId = id
-                    navController.navigate(
-                        BookmarksFragmentDirections.actionBookmarksFragmentToAddBookmarkDialogFragment(id)
-                    )
+                menu.setOnClickListener {
+                    val menuConverted = if (tracker.selection.size() > 1) {
+                        menuItems.drop(1)
+                    } else {
+                        menuItems
+                    }
+                    showMenu(menuConverted)
                 }
             }
             back.setOnClickListener {
                 handleBackPressed()
             }
         }
+    }
+
+    private fun editBookmark() {
+        val id = tracker.selection.map { it }.first()
+        editableId = id
+        navController.navigate(
+            BookmarksFragmentDirections.actionBookmarksFragmentToAddBookmarkDialogFragment(id)
+        )
+    }
+
+    private fun deleteBookmarks() {
+        val folders = tracker.selection.map { it }
+        viewModel.deleteBookmarks(folders)
+    }
+
+    private fun copyBookmarks() {
+        requireContext().copyToClipboard(generateText())
+        tracker.clearSelection()
+    }
+
+    private fun shareBookmarks() {
+        requireContext().shareText(generateText())
+        tracker.clearSelection()
+    }
+
+    private fun generateText(): String {
+        var result = ""
+        tracker.selection.map { id ->
+            adapter.snapshot().items.first { bookmark -> bookmark.id == id }
+        }.forEach { bookmark ->
+            result += "${bookmark.bookmarkTitle}: ${bookmark.bookmarkUrl}\n"
+        }
+        return result
     }
 
     private fun handleBackPressed() {
@@ -201,12 +258,10 @@ class BookmarksFragment :
 
     private fun handleMenuItems(size: Int) {
         binding.includedMenuList.menuItemsContainer.apply {
-            if (size == 1) {
-                transitionToState(better.text.protext.base.R.id.single)
-            } else if (size > 0) {
-                transitionToState(better.text.protext.base.R.id.multi)
+            if (size > 0) {
+                transitionToEnd()
             } else {
-                transitionToState(better.text.protext.base.R.id.none)
+                transitionToStart()
             }
         }
     }

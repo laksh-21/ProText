@@ -31,7 +31,7 @@
     <include
         android:id="@+id/included_menu_list"
         layout="@layout/selected_menu_items"
-        android:layout_width="160dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/sideMargins"
         app:layout_constraintBottom_toTopOf="@+id/top_guideline"

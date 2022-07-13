@@ -10,13 +10,11 @@ import kotlinx.coroutines.flow.*
 class Interactors {
     abstract class SuspendUseCase<in P, out R> {
         operator fun invoke(params: P): Flow<InvokeStatus<R>> = flow {
-            try {
-                emit(InvokeStatus.Loading())
-                val result = doWork(params)
-                emit(InvokeStatus.Success(result))
-            } catch (e: Exception) {
-                emit(InvokeStatus.Failure(e))
-            }
+            emit(InvokeStatus.Loading())
+            val result = doWork(params)
+            emit(InvokeStatus.Success(result))
+        }.catch { e: Throwable ->
+            emit(InvokeStatus.Failure(e as Exception))
         }
         protected abstract suspend fun doWork(params: P): R
     }

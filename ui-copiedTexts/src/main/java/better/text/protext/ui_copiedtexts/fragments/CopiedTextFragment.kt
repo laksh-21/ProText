@@ -1,4 +1,4 @@
-package better.text.protext.ui_copiedtexts.fragments
+package better.text.protext.ui_copiedtexts.fragments // ktlint-disable package-name
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,6 +18,9 @@ import better.text.protext.base.baseAdapters.ItemListLookup
 import better.text.protext.base.baseScreens.BaseFragment
 import better.text.protext.base.baseScreens.UIEvent
 import better.text.protext.base.databinding.AccessibilityListScreenBinding
+import better.text.protext.base.globalUI.utils.GlobalMenuItem
+import better.text.protext.base.utils.copyToClipboard
+import better.text.protext.base.utils.shareText
 import better.text.protext.ui_copiedtexts.R
 import better.text.protext.ui_copiedtexts.adapters.CopiedTextAdapter
 import better.text.protext.ui_copiedtexts.utils.CopiedTextItemKeyProvider
@@ -51,6 +54,29 @@ class CopiedTextFragment :
             }
         }
 
+    private val menuItems = mutableListOf(
+        GlobalMenuItem(
+            itemName = better.text.protext.base.R.string.edit,
+            itemIcon = better.text.protext.base.R.drawable.ic_edit,
+            clickAction = { editText() }
+        ),
+        GlobalMenuItem(
+            itemName = better.text.protext.base.R.string.delete,
+            itemIcon = better.text.protext.base.R.drawable.ic_delete,
+            clickAction = { deleteTexts() }
+        ),
+        GlobalMenuItem(
+            itemName = better.text.protext.base.R.string.copy,
+            itemIcon = better.text.protext.base.R.drawable.ic_copy,
+            clickAction = { copyTexts() }
+        ),
+        GlobalMenuItem(
+            itemName = better.text.protext.base.R.string.share,
+            itemIcon = better.text.protext.base.R.drawable.ic_share,
+            clickAction = { shareTexts() }
+        )
+    )
+
     override fun onCreateView(binding: AccessibilityListScreenBinding, savedInstanceState: Bundle?) {
         initVariables()
         initCopiedTextListView()
@@ -72,19 +98,52 @@ class CopiedTextFragment :
                         CopiedTextFragmentDirections.actionCopiedTextFragmentToAddCopiedTextFragment()
                     )
                 }
-                edit.setOnClickListener {
-                    val id = tracker.selection.map { it }.first()
-                    editableId = id
-                    navController.navigate(
-                        CopiedTextFragmentDirections.actionCopiedTextFragmentToAddCopiedTextFragment(id)
-                    )
+                close.setOnClickListener {
+                    tracker.clearSelection()
                 }
-                delete.setOnClickListener {
-                    val idList = tracker.selection.map { it }
-                    viewModel.deleteCopiedTexts(idList)
+                menu.setOnClickListener {
+                    val menuConverted = if (tracker.selection.size() > 1) {
+                        menuItems.drop(1)
+                    } else {
+                        menuItems
+                    }
+                    showMenu(menuConverted)
                 }
             }
         }
+    }
+
+    private fun editText() {
+        val id = tracker.selection.map { it }.first()
+        editableId = id
+        navController.navigate(
+            CopiedTextFragmentDirections.actionCopiedTextFragmentToAddCopiedTextFragment(id)
+        )
+    }
+
+    private fun deleteTexts() {
+        val idList = tracker.selection.map { it }
+        viewModel.deleteCopiedTexts(idList)
+    }
+
+    private fun copyTexts() {
+        requireContext().copyToClipboard(generateText())
+        tracker.clearSelection()
+    }
+
+    private fun shareTexts() {
+        requireContext().shareText(generateText())
+        tracker.clearSelection()
+    }
+
+    private fun generateText(): String {
+        var result = ""
+        tracker.selection.map { id ->
+            adapter.snapshot().items.first { copiedText -> copiedText.id == id }
+        }.forEach { copiedText ->
+            result += "${copiedText.text}\n"
+        }
+        return result
     }
 
     private fun initCopiedTextListView() {
@@ -153,12 +212,10 @@ class CopiedTextFragment :
 
     private fun handleMenuItems(size: Int) {
         binding.includedMenuList.menuItemsContainer.apply {
-            if (size == 1) {
-                transitionToState(better.text.protext.base.R.id.single)
-            } else if (size > 0) {
-                transitionToState(better.text.protext.base.R.id.multi)
+            if (size > 0) {
+                transitionToEnd()
             } else {
-                transitionToState(better.text.protext.base.R.id.none)
+                transitionToStart()
             }
         }
     }

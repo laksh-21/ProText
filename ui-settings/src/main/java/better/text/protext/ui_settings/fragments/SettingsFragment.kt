@@ -1,8 +1,11 @@
-package better.text.protext.ui_settings.fragments
+package better.text.protext.ui_settings.fragments // ktlint-disable package-name
 
 import android.content.DialogInterface
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.datastore.preferences.core.Preferences
 import androidx.fragment.app.viewModels
@@ -16,6 +19,7 @@ import better.text.protext.ui_settings.R
 import better.text.protext.ui_settings.adapters.SettingsAdapter
 import better.text.protext.ui_settings.utils.SettingItem
 import better.text.protext.ui_settings.utils.SettingType
+import better.text.protext.ui_settings.utils.TutorialType
 import better.text.protext.ui_settings.utils.generateSettingsLayout
 import better.text.protext.ui_settings.viewmodels.SettingsState
 import better.text.protext.ui_settings.viewmodels.SettingsViewModel
@@ -63,6 +67,15 @@ class SettingsFragment :
             val title = getString(R.string.settings)
             tvTitle.text = title
             tvTitleCollapsed.text = title
+            root.apply {
+                getConstraintSet(better.text.protext.base.R.id.none).apply {
+                    setVisibility(better.text.protext.base.R.id.included_menu_list, View.INVISIBLE)
+                }
+                getConstraintSet(better.text.protext.base.R.id.single).apply {
+                    setVisibility(better.text.protext.base.R.id.included_menu_list, View.INVISIBLE)
+                }
+            }
+            includedMenuList.root.visibility = View.INVISIBLE
         }
     }
 
@@ -70,7 +83,7 @@ class SettingsFragment :
         binding.rvList.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = SettingsAdapter(
-                itemsList = generateSettingsLayout(settingsState),
+                itemsList = generateSettingsLayout(settingsState)
             ) {
                 handleItemClick(it)
             }
@@ -80,8 +93,24 @@ class SettingsFragment :
     private fun handleItemClick(item: SettingItem) {
         when (item) {
             is SettingItem.Setting -> handleSettingClick(item)
+            is SettingItem.Tutorial -> handleTutorialClick(item)
             else -> {}
         }
+    }
+
+    private fun handleTutorialClick(item: SettingItem.Tutorial) {
+        val videoUrl = when (item.tutorialType) {
+            TutorialType.CopiedText -> { COPIED_TEXT_URL }
+            TutorialType.Bookmark -> { BOOKMARK_URL }
+        }
+        openYoutube(videoUrl)
+    }
+
+    private fun openYoutube(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(url)
+        }
+        startActivity(Intent.createChooser(intent, "Choose an app to open tutorial."))
     }
 
     private fun handleSettingClick(item: SettingItem.Setting) {
@@ -126,5 +155,10 @@ class SettingsFragment :
         container: ViewGroup?
     ): AccessibilityListScreenBinding {
         return AccessibilityListScreenBinding.inflate(inflater, container, false)
+    }
+
+    companion object {
+        const val COPIED_TEXT_URL = "https://youtube.com/shorts/VPMqi4lbc0c?feature=share"
+        const val BOOKMARK_URL = "https://youtube.com/shorts/0nOWa2s30q4?feature=share"
     }
 }

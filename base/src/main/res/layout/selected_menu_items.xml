@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/menu_items_container"
-    android:layout_width="160dp"
+    android:layout_width="110dp"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     app:layoutDescription="@xml/selected_menu_items_scene2">
 
 
     <ImageButton
-        android:id="@+id/delete"
+        android:id="@+id/menu"
         style="@style/MenuIconButtons"
         android:layout_width="@dimen/iconButtonSize"
         android:layout_height="@dimen/iconButtonSize"
@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="@+id/close"
         app:layout_constraintStart_toStartOf="@+id/close"
         app:layout_constraintTop_toTopOf="@+id/close"
-        app:srcCompat="@drawable/ic_delete" />
+        app:srcCompat="@drawable/ic_more" />
 
     <ImageButton
         android:id="@+id/close"
@@ -48,23 +48,5 @@
         app:layout_constraintEnd_toEndOf="@+id/close"
         app:layout_constraintStart_toStartOf="@+id/close"
         app:layout_constraintTop_toTopOf="@+id/close"
-        app:srcCompat="@drawable/ic_add"
-        tools:layout_editor_absoluteX="231dp"
-        tools:layout_editor_absoluteY="231dp" />
-
-    <ImageButton
-        android:id="@+id/edit"
-        style="@style/MenuIconButtons"
-        android:layout_width="@dimen/iconButtonSize"
-        android:layout_height="@dimen/iconButtonSize"
-        android:alpha="0"
-        android:contentDescription="@string/edit"
-        android:elevation="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/close"
-        app:layout_constraintEnd_toEndOf="@+id/close"
-        app:layout_constraintStart_toStartOf="@+id/close"
-        app:layout_constraintTop_toTopOf="@+id/close"
-        app:srcCompat="@drawable/ic_edit"
-        tools:layout_editor_absoluteX="134dp"
-        tools:layout_editor_absoluteY="231dp" />
+        app:srcCompat="@drawable/ic_add" />
 </androidx.constraintlayout.motion.widget.MotionLayout>

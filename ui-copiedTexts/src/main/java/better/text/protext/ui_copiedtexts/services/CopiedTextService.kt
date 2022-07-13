@@ -1,6 +1,7 @@
-package better.text.protext.ui_copiedtexts.services
+package better.text.protext.ui_copiedtexts.services // ktlint-disable package-name
 
 import android.annotation.SuppressLint
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.util.Log
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -153,18 +155,20 @@ class CopiedTextService : BaseForegroundWindowService<CopiedTextServiceLayoutBin
                 actionTitle = "Dismiss",
                 actionIcon = R.drawable.ic_cancel,
                 action = PendingIntent.getService(this, 0, dismissIntent, 0)
-            ),
+            )
         )
         notificationData = NotificationData(
             title = "Add a Copied Text",
             content = "",
-            iconId = R.drawable.ic_copy,
+            iconId = better.text.protext.base.R.drawable.ic_copy,
             notificationId = 1234,
             channelId = getString(R.string.copied_text_channel_id),
             channelName = getString(R.string.copied_text_channel_name),
             channelDescription = getString(R.string.copied_text_channel_description),
             actions = actions,
-            clickAction = PendingIntent.getService(this, 0, editIntent, 0)
+            clickAction = PendingIntent.getService(this, 0, editIntent, 0),
+            importance = NotificationManager.IMPORTANCE_HIGH,
+            priority = NotificationCompat.PRIORITY_HIGH
         )
     }
 

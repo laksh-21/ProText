@@ -56,7 +56,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun setupBottomNav() {
         binding.bottomNavigationView.setupWithNavController(navController)
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             val showNavBar = destination.parent?.id != better.text.protext.ui_onboarding.R.id.onboarding_nav_graph
             binding.bottomNavigationView.visibility = if (showNavBar) {
                 View.VISIBLE

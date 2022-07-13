@@ -17,6 +17,7 @@ import better.text.protext.base.baseAdapters.ItemListLookup
 import better.text.protext.base.baseScreens.BaseFragment
 import better.text.protext.base.baseScreens.UIEvent
 import better.text.protext.base.databinding.AccessibilityListScreenBinding
+import better.text.protext.base.globalUI.utils.GlobalMenuItem
 import better.text.protext.base.utils.GridSpacingItemDecoration
 import better.text.protext.localdata.database.entities.BookmarkFolder
 import better.text.protext.ui.bookmarks.R
@@ -50,6 +51,29 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
                 handleMenuItems(tracker.selection.size())
             }
         }
+
+    private val menuItems = mutableListOf(
+        GlobalMenuItem(
+            itemName = better.text.protext.base.R.string.edit,
+            itemIcon = better.text.protext.base.R.drawable.ic_edit,
+            clickAction = { editFolder() }
+        ),
+        GlobalMenuItem(
+            itemName = better.text.protext.base.R.string.delete,
+            itemIcon = better.text.protext.base.R.drawable.ic_delete,
+            clickAction = { showDeleteConfirmationDialog() }
+        )
+//        GlobalMenuItem(
+//            itemName = better.text.protext.base.R.string.copy,
+//            itemIcon = better.text.protext.base.R.drawable.ic_copy,
+//            clickAction = { copyFolders() }
+//        ),
+//        GlobalMenuItem(
+//            itemName = better.text.protext.base.R.string.share,
+//            itemIcon = better.text.protext.base.R.drawable.ic_share,
+//            clickAction = { shareFolders() }
+//        )
+    )
 
     override fun inflater(
         inflater: LayoutInflater,
@@ -156,27 +180,46 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
                 close.setOnClickListener {
                     tracker.clearSelection()
                 }
-                delete.setOnClickListener {
-                    showDeleteConfirmationDialog()
-                }
-                edit.setOnClickListener {
-                    navController.navigate(
-                        BookmarkFolderFragmentDirections.actionBookmarkFolderFragmentToAddBookmarkFolderFragment(
-                            folderId = tracker.selection.map { it }.first()
-                        )
-                    )
+                menu.setOnClickListener {
+                    val menuConverted = if (tracker.selection.size() > 1) {
+                        menuItems.drop(1)
+                    } else {
+                        menuItems
+                    }
+                    showMenu(menuConverted)
                 }
             }
         }
     }
 
+    private fun copyFolders() {
+    }
+
+    private fun shareFolders() {
+    }
+
+    private fun editFolder() {
+        navController.navigate(
+            BookmarkFolderFragmentDirections.actionBookmarkFolderFragmentToAddBookmarkFolderFragment(
+                folderId = tracker.selection.map { it }.first()
+            )
+        )
+    }
+
     private fun showDeleteConfirmationDialog() {
+        var folders = tracker.selection.map { it }
+        if (folders.size == 1 && folders.first() == 0L) {
+            Toast.makeText(requireContext(), "Cannot delete default folder", Toast.LENGTH_LONG).show()
+            return
+        }
+        if (folders.contains(0L)) {
+            folders = folders.filter { it != 0L }
+        }
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.delete_folder))
             .setMessage(getString(R.string.delete_folder_warning))
             .setNegativeButton("No") { _, _ -> }
             .setPositiveButton("Yes") { _, _ ->
-                val folders = tracker.selection.map { it }
                 viewModel.deleteFolders(folders)
             }
             .show()
@@ -184,12 +227,10 @@ class BookmarkFolderFragment : BaseFragment<AccessibilityListScreenBinding>() {
 
     private fun handleMenuItems(size: Int) {
         binding.includedMenuList.menuItemsContainer.apply {
-            if (size == 1) {
-                transitionToState(better.text.protext.base.R.id.single)
-            } else if (size > 0) {
-                transitionToState(better.text.protext.base.R.id.multi)
+            if (size > 0) {
+                transitionToEnd()
             } else {
-                transitionToState(better.text.protext.base.R.id.none)
+                transitionToStart()
             }
         }
     }
