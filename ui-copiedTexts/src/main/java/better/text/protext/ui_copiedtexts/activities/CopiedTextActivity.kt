@@ -23,7 +23,7 @@ class CopiedTextActivity : BaseActivity<ActivityCopiedTextBinding>() {
     }
 
     private fun setupPermissionHelper() {
-        permissionHelper = PermissionHelper(activityResultRegistry) {
+        permissionHelper = PermissionHelper(this, activityResultRegistry) {
             if (it) launchService()
             else {
                 Toast.makeText(this, "Could not get required permission", Toast.LENGTH_SHORT).show()
@@ -57,7 +57,7 @@ class CopiedTextActivity : BaseActivity<ActivityCopiedTextBinding>() {
 
     private fun requestOverlayPermission() {
         permissionHelper.requestSystemPermission(
-            Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package: $packageName"))
+            Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
         )
     }
 

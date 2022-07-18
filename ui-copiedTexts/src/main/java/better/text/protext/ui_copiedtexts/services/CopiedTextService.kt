@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
+import android.os.Build
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -46,6 +47,12 @@ class CopiedTextService : BaseForegroundWindowService<CopiedTextServiceLayoutBin
     private lateinit var notificationData: NotificationData
     private val viewModel: CopiedTextServiceViewModel by lazy {
         CopiedTextServiceViewModel(addCopiedTextUseCase = addCopiedTextUseCase)
+    }
+
+    private val pendingIntentFlag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        PendingIntent.FLAG_IMMUTABLE
+    } else {
+        0
     }
 
     companion object {
@@ -144,17 +151,17 @@ class CopiedTextService : BaseForegroundWindowService<CopiedTextServiceLayoutBin
             NotificationAction(
                 actionTitle = "Break",
                 actionIcon = better.text.protext.base.R.drawable.ic_edit,
-                action = PendingIntent.getService(this, 0, breakIntent, 0)
+                action = PendingIntent.getService(this, 0, breakIntent, pendingIntentFlag)
             ),
             NotificationAction(
                 actionTitle = "Save",
                 actionIcon = R.drawable.ic_save,
-                action = PendingIntent.getService(this, 0, saveIntent, 0)
+                action = PendingIntent.getService(this, 0, saveIntent, pendingIntentFlag)
             ),
             NotificationAction(
                 actionTitle = "Dismiss",
                 actionIcon = R.drawable.ic_cancel,
-                action = PendingIntent.getService(this, 0, dismissIntent, 0)
+                action = PendingIntent.getService(this, 0, dismissIntent, pendingIntentFlag)
             )
         )
         notificationData = NotificationData(
@@ -166,7 +173,7 @@ class CopiedTextService : BaseForegroundWindowService<CopiedTextServiceLayoutBin
             channelName = getString(R.string.copied_text_channel_name),
             channelDescription = getString(R.string.copied_text_channel_description),
             actions = actions,
-            clickAction = PendingIntent.getService(this, 0, editIntent, 0),
+            clickAction = PendingIntent.getService(this, 0, editIntent, pendingIntentFlag),
             importance = NotificationManager.IMPORTANCE_HIGH,
             priority = NotificationCompat.PRIORITY_HIGH
         )

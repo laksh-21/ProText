@@ -7,18 +7,19 @@ import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import better.text.protext.base.baseScreens.BaseActivity
 import better.text.protext.base.utils.PermissionHelper
 import better.text.protext.base.utils.Validators
 import better.text.protext.ui.bookmarks.R
+import better.text.protext.ui.bookmarks.databinding.ActivityBookmarksBinding
 import better.text.protext.ui.bookmarks.services.BookmarkService
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class BookmarksActivity : AppCompatActivity() {
+class BookmarksActivity : BaseActivity<ActivityBookmarksBinding>() {
 
     private lateinit var permissionHelper: PermissionHelper
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?, binding: ActivityBookmarksBinding) {
         checkValidUrl()
         if (!isFinishing) {
             setupPermissionHelper()
@@ -39,7 +40,7 @@ class BookmarksActivity : AppCompatActivity() {
     }
 
     private fun setupPermissionHelper() {
-        permissionHelper = PermissionHelper(activityResultRegistry) {
+        permissionHelper = PermissionHelper(this, activityResultRegistry) {
             if (it) launchService()
             else {
                 Toast.makeText(this, "Could not get required permission", Toast.LENGTH_SHORT).show()
@@ -73,7 +74,7 @@ class BookmarksActivity : AppCompatActivity() {
 
     private fun requestOverlayPermission() {
         permissionHelper.requestSystemPermission(
-            Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package: $packageName"))
+            Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
         )
     }
 
@@ -87,5 +88,9 @@ class BookmarksActivity : AppCompatActivity() {
             startService(serviceIntent)
         }
         finish()
+    }
+
+    override fun getViewBinding(): ActivityBookmarksBinding {
+        return ActivityBookmarksBinding.inflate(layoutInflater)
     }
 }

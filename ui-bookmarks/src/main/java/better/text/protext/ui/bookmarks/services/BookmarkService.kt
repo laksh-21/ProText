@@ -206,6 +206,9 @@ class BookmarkService : BaseForegroundWindowService<AddBookmarkServiceLayoutBind
                 it.id == bookmarkFoldersState.settings.defaultFolder
             }.folderName
             setText(selection, false)
+            selectionPosition = bookmarkFoldersState.folders.indexOfFirst {
+                it.id == bookmarkFoldersState.settings.defaultFolder
+            }
         }
     }
 
